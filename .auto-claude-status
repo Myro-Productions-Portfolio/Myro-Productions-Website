@@ -1,0 +1,25 @@
+{
+  "active": true,
+  "spec": "001-myro-productions-personal-website",
+  "state": "building",
+  "subtasks": {
+    "completed": 3,
+    "total": 25,
+    "in_progress": 1,
+    "failed": 0
+  },
+  "phase": {
+    "current": "Design System & Styling",
+    "id": null,
+    "total": 4
+  },
+  "workers": {
+    "active": 0,
+    "max": 1
+  },
+  "session": {
+    "number": 2,
+    "started_at": "2026-01-02T15:06:39.600875"
+  },
+  "last_update": "2026-01-02T15:06:52.565634"
+}

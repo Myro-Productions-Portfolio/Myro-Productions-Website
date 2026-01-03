@@ -1,0 +1,342 @@
+{
+  "integrations_researched": [
+    {
+      "name": "Next.js",
+      "type": "framework",
+      "verified_package": {
+        "name": "next",
+        "install_command": "npx create-next-app@latest my-project --typescript --eslint --app",
+        "manual_install": "npm i next@latest react@latest react-dom@latest",
+        "version": "latest (v15+)",
+        "verified": true
+      },
+      "api_patterns": {
+        "imports": [
+          "import Image from 'next/image'",
+          "import Link from 'next/link'",
+          "import { useRouter } from 'next/navigation'"
+        ],
+        "initialization": "npx create-next-app@latest with --yes flag includes TypeScript, Tailwind, ESLint, App Router, and Turbopack",
+        "key_functions": [
+          "App Router file-based routing (app/page.tsx, app/layout.tsx)",
+          "Server Components (default)",
+          "Client Components ('use client' directive)",
+          "Image optimization (next/image)",
+          "Font optimization (next/font)"
+        ],
+        "verified_against": "Official Next.js documentation (nextjs.org/docs/getting-started/installation)"
+      },
+      "configuration": {
+        "env_vars": [],
+        "config_files": [
+          "next.config.js or next.config.ts",
+          "package.json scripts (dev, build, start, lint)"
+        ],
+        "dependencies": [
+          "react@latest",
+          "react-dom@latest"
+        ]
+      },
+      "infrastructure": {
+        "requires_docker": false,
+        "node_version": "v20.9 or higher",
+        "default_port": 3000
+      },
+      "gotchas": [
+        "App Router is the default (not Pages Router)",
+        "Server Components are the default - add 'use client' for client-side interactivity",
+        "Turbopack is now the default bundler",
+        "Import alias @/* is configured by default"
+      ],
+      "research_sources": [
+        "https://nextjs.org/docs/getting-started/installation",
+        "Context7 MCP: /websites/nextjs_app (Benchmark Score: 92.5)"
+      ]
+    },
+    {
+      "name": "Tailwind CSS",
+      "type": "library",
+      "verified_package": {
+        "name": "tailwindcss",
+        "install_command": "npm install tailwindcss @tailwindcss/postcss postcss",
+        "version": "v4 (latest)",
+        "verified": true
+      },
+      "api_patterns": {
+        "imports": [
+          "@import 'tailwindcss'; (in globals.css)"
+        ],
+        "initialization": "Configure postcss.config.mjs with @tailwindcss/postcss plugin",
+        "key_functions": [
+          "Utility-first CSS classes",
+          "Custom color configuration via CSS variables or theme",
+          "Dark mode support (class or media strategy)",
+          "Responsive design with breakpoint prefixes (sm:, md:, lg:, xl:, 2xl:)"
+        ],
+        "verified_against": "Official Tailwind CSS documentation (tailwindcss.com/docs/installation/framework-guides)"
+      },
+      "configuration": {
+        "env_vars": [],
+        "config_files": [
+          "postcss.config.mjs",
+          "app/globals.css (with @import)",
+          "tailwind.config.js (optional for customization)"
+        ],
+        "dependencies": [
+          "@tailwindcss/postcss",
+          "postcss"
+        ]
+      },
+      "infrastructure": {
+        "requires_docker": false
+      },
+      "gotchas": [
+        "Tailwind v4 uses @import instead of @tailwind directives",
+        "Uses @tailwindcss/postcss plugin (not tailwindcss directly in postcss config)",
+        "postcss.config.mjs (not .js) for ESM syntax",
+        "Custom colors for dark mossy green and carbon fiber textures will need custom CSS/theme extension"
+      ],
+      "research_sources": [
+        "https://tailwindcss.com/docs/installation",
+        "Context7 MCP: /websites/v3_tailwindcss (Benchmark Score: 85.9)"
+      ]
+    },
+    {
+      "name": "Framer Motion / Motion",
+      "type": "library",
+      "verified_package": {
+        "name": "motion",
+        "install_command": "npm install motion",
+        "alternative_package": "framer-motion",
+        "alternative_install": "npm install framer-motion",
+        "version": "latest",
+        "verified": true,
+        "note": "Motion is the successor to Framer Motion - same team, same API"
+      },
+      "api_patterns": {
+        "imports": [
+          "import { motion } from 'motion/react'",
+          "import { motion, AnimatePresence } from 'framer-motion' (legacy)"
+        ],
+        "initialization": "Wrap elements with motion.div or other motion components",
+        "key_functions": [
+          "motion.div - Animate any HTML element",
+          "animate prop - Define animation states",
+          "initial prop - Define starting state",
+          "whileInView - Trigger animations when element enters viewport",
+          "transition prop - Control timing and easing",
+          "AnimatePresence - Handle exit animations",
+          "useScroll - Scroll-linked animations",
+          "useTransform - Transform scroll values to animation values"
+        ],
+        "verified_against": "Context7 MCP resolution confirmed library exists"
+      },
+      "configuration": {
+        "env_vars": [],
+        "config_files": [],
+        "dependencies": []
+      },
+      "infrastructure": {
+        "requires_docker": false
+      },
+      "gotchas": [
+        "Requires 'use client' directive in Next.js App Router components",
+        "Motion is the newer package name (same creators as framer-motion)",
+        "useInView and whileInView are excellent for scroll-triggered fade-ins",
+        "For parallax effects, combine useScroll with useTransform"
+      ],
+      "research_sources": [
+        "Context7 MCP: /websites/motion-dev-docs (Benchmark Score: 85.5)",
+        "https://motion.dev/docs"
+      ]
+    },
+    {
+      "name": "GSAP (GreenSock Animation Platform)",
+      "type": "library",
+      "verified_package": {
+        "name": "gsap",
+        "install_command": "npm install gsap",
+        "version": "3.x (latest)",
+        "verified": true
+      },
+      "api_patterns": {
+        "imports": [
+          "import gsap from 'gsap'",
+          "import { ScrollTrigger } from 'gsap/ScrollTrigger'",
+          "import { useGSAP } from '@gsap/react'"
+        ],
+        "initialization": "gsap.registerPlugin(ScrollTrigger); // Register plugins before use",
+        "key_functions": [
+          "gsap.to() - Animate to end values",
+          "gsap.from() - Animate from start values",
+          "gsap.fromTo() - Animate from start to end",
+          "gsap.timeline() - Sequence multiple animations",
+          "ScrollTrigger.create() - Scroll-based animation triggers",
+          "useGSAP() - React hook for cleanup"
+        ],
+        "verified_against": "Context7 MCP resolution confirmed library exists"
+      },
+      "configuration": {
+        "env_vars": [],
+        "config_files": [],
+        "dependencies": [
+          "@gsap/react (for React integration)"
+        ]
+      },
+      "infrastructure": {
+        "requires_docker": false
+      },
+      "gotchas": [
+        "Must register plugins with gsap.registerPlugin() before use",
+        "ScrollTrigger is perfect for parallax effects",
+        "Use useGSAP hook in React for proper cleanup (avoids memory leaks)",
+        "Some premium plugins require GreenSock license (ScrollSmoother, SplitText)",
+        "Free plugins: ScrollTrigger, Flip, Draggable are free for most uses"
+      ],
+      "research_sources": [
+        "Context7 MCP: /llmstxt/gsap_llms_txt (Benchmark Score: 86.1)",
+        "https://gsap.com/docs/v3/"
+      ]
+    },
+    {
+      "name": "React",
+      "type": "library",
+      "verified_package": {
+        "name": "react",
+        "install_command": "npm install react react-dom",
+        "version": "18.x or 19.x (latest)",
+        "verified": true,
+        "note": "Included automatically with create-next-app"
+      },
+      "api_patterns": {
+        "imports": [
+          "import { useState, useEffect, useRef } from 'react'",
+          "'use client' // Required for client components in Next.js App Router"
+        ],
+        "initialization": "Included with Next.js setup",
+        "key_functions": [
+          "useState - State management",
+          "useEffect - Side effects",
+          "useRef - DOM references",
+          "useMemo, useCallback - Performance optimization"
+        ],
+        "verified_against": "Included in Next.js documentation"
+      },
+      "configuration": {
+        "env_vars": [],
+        "config_files": [],
+        "dependencies": [
+          "react-dom"
+        ]
+      },
+      "infrastructure": {
+        "requires_docker": false
+      },
+      "gotchas": [
+        "Server Components (default in Next.js) cannot use hooks",
+        "Add 'use client' at top of file for client-side interactivity",
+        "React 19 introduces new features like use() hook"
+      ],
+      "research_sources": [
+        "Included with Next.js installation documentation"
+      ]
+    },
+    {
+      "name": "TypeScript",
+      "type": "language",
+      "verified_package": {
+        "name": "typescript",
+        "install_command": "Included with create-next-app --typescript",
+        "version": "5.x (latest)",
+        "verified": true
+      },
+      "api_patterns": {
+        "imports": [],
+        "initialization": "Included by default with Next.js setup",
+        "key_functions": [
+          "Type annotations for props and state",
+          "Interface definitions for data structures",
+          "Type safety for portfolio item filtering"
+        ],
+        "verified_against": "Next.js default configuration"
+      },
+      "configuration": {
+        "env_vars": [],
+        "config_files": [
+          "tsconfig.json (generated by create-next-app)"
+        ],
+        "dependencies": [
+          "@types/react",
+          "@types/react-dom",
+          "@types/node"
+        ]
+      },
+      "infrastructure": {
+        "requires_docker": false
+      },
+      "gotchas": [
+        "Type definitions included by default with Next.js",
+        "Use .tsx extension for React components",
+        "Path aliases configured in tsconfig.json (@/*)"
+      ],
+      "research_sources": [
+        "Included with Next.js installation documentation"
+      ]
+    }
+  ],
+  "unverified_claims": [
+    {
+      "claim": "LinkedIn API integration for bio data pull",
+      "reason": "Requirements mention pulling data from LinkedIn for Nicolas Robert Myers. LinkedIn's public API has strict limitations and OAuth requirements. Manual content extraction is more practical.",
+      "risk_level": "medium",
+      "recommendation": "Manually curate bio content rather than attempting LinkedIn API integration"
+    },
+    {
+      "claim": "Carbon fiber texture implementation",
+      "reason": "Specific implementation approach not researched - could be CSS background patterns, SVG textures, or image assets",
+      "risk_level": "low",
+      "recommendation": "Use CSS repeating patterns or subtle SVG textures for performance"
+    }
+  ],
+  "recommendations": [
+    {
+      "category": "Animation Library Choice",
+      "recommendation": "Use Motion (Framer Motion) as primary animation library for fade-ins, transitions, and viewport-triggered animations. Reserve GSAP for complex parallax effects if needed.",
+      "rationale": "Motion has excellent React integration and is easier to use for most animations. GSAP excels at complex timeline-based animations and parallax."
+    },
+    {
+      "category": "Project Setup",
+      "recommendation": "Use 'npx create-next-app@latest --yes' for quickest setup with all recommended defaults (TypeScript, Tailwind, ESLint, App Router, Turbopack)",
+      "rationale": "This includes all required technologies in one command"
+    },
+    {
+      "category": "Styling Approach",
+      "recommendation": "Extend Tailwind CSS with custom colors for dark mossy green palette in tailwind.config.js or CSS variables. Create reusable component styles.",
+      "rationale": "Maintains consistency and allows easy theme customization"
+    },
+    {
+      "category": "Portfolio Filtering",
+      "recommendation": "Implement client-side filtering with React state - no external library needed for simple category filtering",
+      "rationale": "Simple category filtering doesn't require additional dependencies"
+    },
+    {
+      "category": "Performance",
+      "recommendation": "Use Next.js Image component for all images, lazy-load portfolio items, and implement scroll-triggered animations to reduce initial load",
+      "rationale": "Core Web Vitals are critical for portfolio sites"
+    }
+  ],
+  "tech_stack_summary": {
+    "framework": "Next.js 15+ (App Router)",
+    "styling": "Tailwind CSS v4",
+    "animations": "Motion (Framer Motion) + GSAP (for complex parallax)",
+    "language": "TypeScript",
+    "runtime": "Node.js v20.9+"
+  },
+  "context7_libraries_used": [
+    "/websites/nextjs_app",
+    "/websites/motion-dev-docs",
+    "/websites/v3_tailwindcss",
+    "/llmstxt/gsap_llms_txt"
+  ],
+  "created_at": "2025-01-02T12:00:00Z"
+}

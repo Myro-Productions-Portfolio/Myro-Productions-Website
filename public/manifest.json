@@ -1,0 +1,27 @@
+{
+  "name": "Myro Productions",
+  "short_name": "Myro",
+  "description": "From concept to production, faster than you thought possible. Expert rapid prototyping, automation solutions, and AI-accelerated development services.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1c1c1c",
+  "theme_color": "#1a2e1a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "development"],
+  "lang": "en-US",
+  "dir": "ltr"
+}

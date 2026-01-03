@@ -1,0 +1,40 @@
+{
+  "project_root": "D:\\Projects\\Myro_Productions_Website",
+  "project_type": "single",
+  "services": {
+    "nextjs-frontend": {
+      "path": ".",
+      "tech_stack": ["typescript", "next.js", "tailwind-css-v4", "motion", "gsap"],
+      "port": 3000,
+      "dev_command": "npm run dev",
+      "build_command": "npm run build",
+      "test_command": "npm test",
+      "lint_command": "npm run lint"
+    }
+  },
+  "infrastructure": {
+    "docker": false,
+    "database": null,
+    "ci_cd": null
+  },
+  "conventions": {
+    "linter": "eslint",
+    "formatter": "prettier",
+    "testing": "vitest",
+    "styling": "tailwind-css-v4",
+    "component_pattern": "server-components-default-client-for-interactivity"
+  },
+  "entry_points": {
+    "main": "app/page.tsx",
+    "layout": "app/layout.tsx",
+    "styles": "app/globals.css"
+  },
+  "key_directories": {
+    "app": "Next.js App Router pages and layouts",
+    "components/sections": "Page section components (Hero, Services, etc.)",
+    "components/ui": "Reusable UI components (Button, Card, etc.)",
+    "components/animations": "Animation wrapper components",
+    "lib": "Utilities and data",
+    "public": "Static assets (images, textures)"
+  }
+}
