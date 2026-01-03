@@ -7,11 +7,17 @@ type Theme = 'dark' | 'light';
 interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
+  isTransitioning: boolean;
+  pendingTheme: Theme | null;
+  executeThemeChange: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType>({
   theme: 'dark',
   toggleTheme: () => {},
+  isTransitioning: false,
+  pendingTheme: null,
+  executeThemeChange: () => {},
 });
 
 export function useTheme() {
@@ -29,6 +35,8 @@ interface ThemeProviderProps {
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>('dark');
   const [mounted, setMounted] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [pendingTheme, setPendingTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -53,8 +61,17 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+    setPendingTheme(newTheme);
+    setIsTransitioning(true);
+  };
+
+  const executeThemeChange = () => {
+    if (pendingTheme) {
+      setTheme(pendingTheme);
+      localStorage.setItem('theme', pendingTheme);
+    }
+    setIsTransitioning(false);
+    setPendingTheme(null);
   };
 
   // Prevent flash of wrong theme by rendering children only after mounting
@@ -63,7 +80,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, isTransitioning, pendingTheme, executeThemeChange }}>
       {children}
     </ThemeContext.Provider>
   );

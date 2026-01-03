@@ -20,7 +20,7 @@ const navLinks: NavLink[] = [
 ];
 
 export default function Navigation() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, isTransitioning } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -158,8 +158,9 @@ export default function Navigation() {
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="ml-2 p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-moss-900/30 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              disabled={isTransitioning}
+              className="ml-2 p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-moss-900/30 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label={isTransitioning ? 'Theme transitioning...' : theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               <motion.div
                 initial={false}
@@ -176,8 +177,9 @@ export default function Navigation() {
             {/* Theme Toggle Button (Mobile) */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-moss-900/30 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              disabled={isTransitioning}
+              className="p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-moss-900/30 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label={isTransitioning ? 'Theme transitioning...' : theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               <motion.div
                 initial={false}

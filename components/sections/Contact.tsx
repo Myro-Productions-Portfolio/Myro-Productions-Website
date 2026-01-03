@@ -1,10 +1,11 @@
 'use client';
 
-import { useRef, useState, FormEvent } from 'react';
+import { useRef, useState, useEffect, FormEvent } from 'react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { shake } from '@/lib/animations';
+import { getOrCreateCsrfToken, regenerateCsrfToken, CSRF_HEADER_NAME } from '@/lib/csrf';
 import Input from '@/components/ui/Input';
 import Textarea from '@/components/ui/Textarea';
 import Select, { SelectOption } from '@/components/ui/Select';
@@ -66,10 +67,18 @@ export default function Contact() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<FieldTouched>({});
   const [status, setStatus] = useState<FormStatus>('idle');
+  const [csrfToken, setCsrfToken] = useState<string>('');
 
   const prefersReducedMotion = typeof window !== 'undefined'
     ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
     : false;
+
+  // Initialize CSRF token on component mount
+  useEffect(() => {
+    // Generate and store CSRF token in cookie, then save to state for header
+    const token = getOrCreateCsrfToken();
+    setCsrfToken(token);
+  }, []);
 
   // GSAP entrance animations
   useGSAP(() => {
@@ -265,15 +274,24 @@ export default function Contact() {
       return;
     }
 
+    // Ensure CSRF token is available
+    if (!csrfToken) {
+      console.error('CSRF token not available');
+      setStatus('error');
+      return;
+    }
+
     setStatus('loading');
 
-    // Send to API route using Web3Forms
+    // Send to API route using Web3Forms with CSRF protection
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          [CSRF_HEADER_NAME]: csrfToken,
         },
+        credentials: 'same-origin', // Include cookies in the request
         body: JSON.stringify(formData),
       });
 
@@ -298,6 +316,9 @@ export default function Contact() {
         setErrors({});
         setTouched({});
         setStatus('idle');
+        // Regenerate CSRF token for next submission
+        const newToken = regenerateCsrfToken();
+        setCsrfToken(newToken);
       }, 3000);
     } catch (error) {
       console.error('Form submission error:', error);

@@ -152,6 +152,49 @@ body {
 }
 
 /* =========================================
+   Warp Transition Styles
+   ========================================= */
+
+.warp-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.warp-overlay.active {
+  pointer-events: all;
+}
+
+.warp-speed-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 0;
+  transform-origin: center bottom;
+  opacity: 0;
+}
+
+.warp-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  filter: blur(40px);
+}
+
+.warp-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 0%, transparent 30%, rgba(0,0,0,0.3) 100%);
+  pointer-events: none;
+}
+
+/* =========================================
    Reduced Motion Support
    ========================================= */
 
@@ -166,6 +209,11 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /* Reduced motion: instant theme switch */
+  .warp-overlay {
+    display: none;
   }
 }
 

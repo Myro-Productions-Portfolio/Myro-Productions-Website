@@ -22,9 +22,15 @@ export default function BookingButton({
   variant = 'primary',
   size = 'lg',
   className = '',
-  calendlyUrl = 'https://calendly.com/myroproductions/discovery',
+  calendlyUrl = 'https://calendly.com/pmnicolasm/30min',
 }: BookingButtonProps) {
   useEffect(() => {
+    // Load Calendly widget CSS
+    const link = document.createElement('link')
+    link.href = 'https://assets.calendly.com/assets/external/widget.css'
+    link.rel = 'stylesheet'
+    document.head.appendChild(link)
+
     // Load Calendly widget script
     const script = document.createElement('script')
     script.src = 'https://assets.calendly.com/assets/external/widget.js'
@@ -32,7 +38,10 @@ export default function BookingButton({
     document.body.appendChild(script)
 
     return () => {
-      // Cleanup script on unmount
+      // Cleanup on unmount
+      if (document.head.contains(link)) {
+        document.head.removeChild(link)
+      }
       if (document.body.contains(script)) {
         document.body.removeChild(script)
       }

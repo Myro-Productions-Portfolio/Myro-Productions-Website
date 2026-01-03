@@ -1,12 +1,14 @@
 'use client'
 
 import { useRef } from 'react'
+import Image from 'next/image'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { float as floatAnimation } from '@/lib/animations'
 import Button from '@/components/ui/Button'
 import BookingButton from '@/components/ui/BookingButton'
+import { useTheme } from '@/lib/ThemeContext'
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -14,6 +16,7 @@ if (typeof window !== 'undefined') {
 }
 
 export default function Hero() {
+  const { theme } = useTheme()
   const heroRef = useRef<HTMLElement>(null)
   const backgroundRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -22,6 +25,8 @@ export default function Hero() {
   const buttonsRef = useRef<HTMLDivElement>(null)
   const decorative1Ref = useRef<HTMLDivElement>(null)
   const decorative2Ref = useRef<HTMLDivElement>(null)
+
+  const isLightMode = theme === 'light'
 
   // Check for reduced motion preference
   const prefersReducedMotion = typeof window !== 'undefined'
@@ -125,16 +130,32 @@ export default function Hero() {
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background with carbon fiber texture and parallax */}
+      {/* Background with hero image and parallax */}
       <div
         ref={backgroundRef}
-        className="absolute inset-0 bg-carbon-subtle"
+        className="absolute inset-0"
         style={{
           willChange: 'transform',
         }}
       >
-        {/* Gradient overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-br from-moss-900/30 via-carbon/50 to-carbon-dark/80" />
+        {/* Hero background image - switches based on theme */}
+        <Image
+          src={isLightMode ? "/images/hero-image-2.png" : "/images/hero-image-1.png"}
+          alt=""
+          fill
+          priority
+          quality={85}
+          sizes="100vw"
+          className="object-cover object-center transition-opacity duration-500"
+          aria-hidden="true"
+        />
+
+        {/* Gradient overlay for depth and text readability */}
+        <div className={`absolute inset-0 transition-colors duration-500 ${
+          isLightMode
+            ? 'bg-gradient-to-br from-white/30 via-white/20 to-white/40'
+            : 'bg-gradient-to-br from-carbon-dark/70 via-carbon/60 to-carbon-dark/80'
+        }`} />
 
         {/* Accent gradient spotlight */}
         <div
@@ -151,10 +172,16 @@ export default function Hero() {
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6"
           style={{ perspective: '1000px' }}
         >
-          <span className="line block text-text-primary">
+          <span className={`line block transition-colors duration-500 ${
+            isLightMode ? 'text-accent-dark' : 'text-text-primary'
+          }`}>
             One-Man
           </span>
-          <span className="line block bg-gradient-to-r from-accent via-accent-light to-accent bg-clip-text text-transparent">
+          <span className={`line block bg-clip-text text-transparent transition-all duration-500 ${
+            isLightMode
+              ? 'bg-gradient-to-r from-accent-dark via-accent to-accent-dark'
+              : 'bg-gradient-to-r from-accent via-accent-light to-accent'
+          }`}>
             Production Powerhouse
           </span>
         </h1>
@@ -162,11 +189,15 @@ export default function Hero() {
         {/* Subheadline */}
         <div
           ref={subheadlineRef}
-          className="text-xl sm:text-2xl md:text-3xl text-text-secondary max-w-4xl mx-auto mb-12 leading-relaxed"
+          className={`text-xl sm:text-2xl md:text-3xl max-w-5xl mx-auto mb-12 leading-relaxed transition-colors duration-500 ${
+            isLightMode ? 'text-accent-dark/80' : 'text-text-secondary'
+          }`}
         >
           <p className="mb-2">
             From concept to production,{' '}
-            <span className="text-accent font-semibold">faster than you thought possible.</span>
+            <span className={`font-semibold transition-colors duration-500 ${
+              isLightMode ? 'text-accent-dark' : 'text-accent'
+            }`}>faster than you thought possible.</span>
           </p>
           <p>
             Rapid prototyping, automation solutions, and AI-accelerated development.
