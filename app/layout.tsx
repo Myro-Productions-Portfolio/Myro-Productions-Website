@@ -6,7 +6,7 @@ import Navigation from '@/components/ui/Navigation'
 import Footer from '@/components/sections/Footer'
 import JsonLd from '@/components/seo/JsonLd'
 import WarpTransition from '@/components/animations/WarpTransition'
-import { Analytics } from '@vercel/analytics/react'
+import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const geistSans = Geist({
