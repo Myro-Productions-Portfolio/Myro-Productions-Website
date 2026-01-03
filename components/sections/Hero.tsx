@@ -160,15 +160,18 @@ export default function Hero() {
         </h1>
 
         {/* Subheadline */}
-        <p
+        <div
           ref={subheadlineRef}
-          className="text-xl sm:text-2xl md:text-3xl text-text-secondary max-w-3xl mx-auto mb-12 leading-relaxed"
+          className="text-xl sm:text-2xl md:text-3xl text-text-secondary max-w-4xl mx-auto mb-12 leading-relaxed"
         >
-          From concept to production,{' '}
-          <span className="text-accent font-semibold">faster than you thought possible</span>.
-          <br />
-          Rapid prototyping, automation solutions, and AI-accelerated development.
-        </p>
+          <p className="mb-2">
+            From concept to production,{' '}
+            <span className="text-accent font-semibold">faster than you thought possible.</span>
+          </p>
+          <p>
+            Rapid prototyping, automation solutions, and AI-accelerated development.
+          </p>
+        </div>
 
         {/* CTA Buttons */}
         <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
