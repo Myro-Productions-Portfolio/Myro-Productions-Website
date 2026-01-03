@@ -1,0 +1,22 @@
+{
+  "sourceType": "manual",
+  "category": "documentation",
+  "priority": "high",
+  "complexity": "large",
+  "impact": "high",
+  "model": "opus",
+  "thinkingLevel": "high",
+  "isAutoProfile": true,
+  "phaseModels": {
+    "spec": "opus",
+    "planning": "opus",
+    "coding": "opus",
+    "qa": "opus"
+  },
+  "phaseThinking": {
+    "spec": "ultrathink",
+    "planning": "high",
+    "coding": "low",
+    "qa": "low"
+  }
+}

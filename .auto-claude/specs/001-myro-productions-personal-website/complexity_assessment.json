@@ -1,0 +1,122 @@
+{
+  "complexity": "standard",
+  "workflow_type": "feature",
+  "confidence": 0.85,
+  "reasoning": "Greenfield website build with 5 major sections, custom animations, portfolio filtering, and contact form. While comprehensive in scope (15-25 files), this uses standard web development patterns with no complex external integrations or infrastructure requirements. Research needed for animation library selection and implementation patterns.",
+
+  "analysis": {
+    "scope": {
+      "estimated_files": 20,
+      "estimated_services": 1,
+      "is_cross_cutting": false,
+      "notes": "Single web application with 5 sections. Components: Hero, Services, Portfolio (with filter), About, Contact. Plus shared layouts, styles, animations, and assets."
+    },
+    "integrations": {
+      "external_services": [],
+      "new_dependencies": ["animation-library", "form-handler"],
+      "research_needed": true,
+      "notes": "Animation library (GSAP, Framer Motion, or AOS) needed for parallax/fade effects. Contact form may use Netlify Forms, Formspree, or similar. LinkedIn data will likely be manual content pull, not API integration."
+    },
+    "infrastructure": {
+      "docker_changes": false,
+      "database_changes": false,
+      "config_changes": true,
+      "notes": "Greenfield project requires initial setup (framework, build tools, deployment config) but no complex infrastructure. Static site or simple hosting."
+    },
+    "knowledge": {
+      "patterns_exist": false,
+      "research_required": true,
+      "unfamiliar_tech": ["parallax-animation-patterns", "carbon-fiber-css-textures"],
+      "notes": "Standard web patterns apply but project is greenfield. Need research for: animation library best practices, carbon fiber texture CSS techniques, smooth parallax implementation, portfolio filtering UX patterns."
+    },
+    "risk": {
+      "level": "low",
+      "concerns": [
+        "Animation performance on mobile devices",
+        "Matching specific aesthetic vision (subjective design requirements)",
+        "Portfolio filter responsiveness and UX"
+      ],
+      "notes": "Primary risk is aesthetic - matching the 'tactical, premium, tech-forward' vision. Technical implementation is straightforward but design validation is subjective."
+    }
+  },
+
+  "recommended_phases": [
+    "discovery",
+    "requirements",
+    "research",
+    "context",
+    "spec_writing",
+    "planning",
+    "validation"
+  ],
+
+  "flags": {
+    "needs_research": true,
+    "needs_self_critique": false,
+    "needs_infrastructure_setup": true
+  },
+
+  "research_topics": [
+    {
+      "topic": "Animation Library Selection",
+      "priority": "high",
+      "questions": [
+        "GSAP vs Framer Motion vs AOS for parallax and fade-in effects",
+        "Performance best practices for smooth scroll animations",
+        "Mobile-optimized animation patterns"
+      ]
+    },
+    {
+      "topic": "Framework/Stack Decision",
+      "priority": "high",
+      "questions": [
+        "React/Next.js vs vanilla HTML/CSS/JS vs other frameworks",
+        "Static site generation vs SPA for portfolio site",
+        "Hosting options (Vercel, Netlify, GitHub Pages)"
+      ]
+    },
+    {
+      "topic": "Design Implementation",
+      "priority": "medium",
+      "questions": [
+        "CSS techniques for carbon fiber texture backgrounds",
+        "Dark mossy green color palette best practices",
+        "Tactical/premium aesthetic patterns in modern web design"
+      ]
+    },
+    {
+      "topic": "Contact Form Implementation",
+      "priority": "medium",
+      "questions": [
+        "Serverless form handling options (Netlify Forms, Formspree, etc.)",
+        "Form validation and UX best practices"
+      ]
+    }
+  ],
+
+  "validation_recommendations": {
+    "risk_level": "low",
+    "skip_validation": false,
+    "minimal_mode": true,
+    "test_types_required": ["unit"],
+    "security_scan_required": false,
+    "staging_deployment_required": false,
+    "reasoning": "Static portfolio website with no sensitive data handling, authentication, or database. Contact form is the only user input - validation should focus on form functionality and animation performance. Minimal testing mode appropriate as no security-critical features."
+  },
+
+  "workflow_type_correction": {
+    "original": "documentation",
+    "corrected": "feature",
+    "reasoning": "Task description clearly states 'Build a modern, sleek personal website' which is feature development, not documentation. The requirements describe building actual software components (Hero, Services, Portfolio with filtering, Contact form), not writing docs."
+  },
+
+  "implementation_notes": [
+    "Greenfield project - needs initial scaffolding and tech stack setup",
+    "Portfolio filtering suggests need for data structure/taxonomy early in design",
+    "Animation system should be designed holistically, not per-section",
+    "Mobile-first approach recommended for animation performance",
+    "Consider component library for consistent styling across sections"
+  ],
+
+  "created_at": "2025-01-02T12:00:00.000Z"
+}

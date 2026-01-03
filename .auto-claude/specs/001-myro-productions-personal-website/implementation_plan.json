@@ -1,0 +1,741 @@
+{
+  "feature": "Myro Productions Personal Portfolio Website",
+  "workflow_type": "feature",
+  "workflow_rationale": "Greenfield project requiring full website implementation from scratch. Building a complete 5-section portfolio website with custom animations, portfolio filtering, and a distinct design system. This follows the standard feature workflow: setup -> design system -> components -> sections -> composition -> integration.",
+  "phases": [
+    {
+      "id": "phase-1-setup",
+      "name": "Project Setup & Configuration",
+      "type": "setup",
+      "description": "Initialize Next.js 15 project with TypeScript, Tailwind CSS v4, and animation libraries",
+      "depends_on": [],
+      "parallel_safe": false,
+      "subtasks": [
+        {
+          "id": "subtask-1-1",
+          "description": "Initialize Next.js 15 project with TypeScript and Tailwind",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [
+            "package.json",
+            "next.config.ts",
+            "tsconfig.json"
+          ],
+          "patterns_from": [
+            "Next.js 15 create-next-app defaults"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "npm run dev -- --port 3000",
+            "expected": "Server starts on http://localhost:3000"
+          },
+          "status": "completed",
+          "notes": "Created all Next.js 15 project files manually (npm/npx blocked in sandbox). Files created: package.json, next.config.ts, tsconfig.json, postcss.config.mjs, tailwind.config.ts, next-env.d.ts, eslint.config.mjs, .gitignore, app/layout.tsx, app/page.tsx, app/globals.css. Dependencies: Next.js 15.1.0, React 19.0.0, Tailwind CSS 4.0.0 with @tailwindcss/postcss. User must run `npm install` externally to install dependencies before dev server can start.",
+          "updated_at": "2026-01-02T19:09:31.931829+00:00"
+        },
+        {
+          "id": "subtask-1-2",
+          "description": "Install animation libraries (Motion and GSAP)",
+          "service": "nextjs-frontend",
+          "files_to_modify": [
+            "package.json"
+          ],
+          "files_to_create": [],
+          "patterns_from": [],
+          "verification": {
+            "type": "command",
+            "command": "npm ls motion gsap @gsap/react",
+            "expected": "motion@, gsap@, @gsap/react@ listed"
+          },
+          "status": "completed",
+          "notes": "Added motion@^11.15.0, gsap@^3.12.5, and @gsap/react@^2.1.1 to package.json dependencies. Committed to git. Note: npm install must be run externally to install packages (sandbox restriction).",
+          "updated_at": "2026-01-02T19:11:00.600205+00:00"
+        },
+        {
+          "id": "subtask-1-3",
+          "description": "Configure PostCSS for Tailwind CSS v4",
+          "service": "nextjs-frontend",
+          "files_to_modify": [
+            "postcss.config.mjs"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "Tailwind CSS v4 PostCSS plugin docs"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "npm run dev",
+            "expected": "Dev server starts without PostCSS errors"
+          },
+          "status": "completed",
+          "notes": "PostCSS configuration for Tailwind CSS v4 was already correctly set up in subtask-1-1. The postcss.config.mjs uses @tailwindcss/postcss plugin which is the correct configuration for Tailwind CSS v4. The globals.css has the correct @import 'tailwindcss' syntax. No changes were needed - configuration verified as correct. Note: npm run dev verification cannot be executed due to sandbox restrictions, but configuration follows official Tailwind CSS v4 patterns.",
+          "updated_at": "2026-01-02T19:54:05.401043+00:00"
+        }
+      ]
+    },
+    {
+      "id": "phase-2-design-system",
+      "name": "Design System & Styling",
+      "type": "implementation",
+      "description": "Create the dark mossy green color palette, carbon fiber textures, and global styles using Tailwind CSS v4",
+      "depends_on": [
+        "phase-1-setup"
+      ],
+      "parallel_safe": false,
+      "subtasks": [
+        {
+          "id": "subtask-2-1",
+          "description": "Create globals.css with Tailwind v4 imports and custom theme colors",
+          "service": "nextjs-frontend",
+          "files_to_modify": [
+            "app/globals.css"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "Tailwind CSS v4 @import syntax",
+            "spec.md color palette"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "npm run dev",
+            "expected": "Dev server starts, no CSS errors in console"
+          },
+          "status": "pending",
+          "notes": "Use @import 'tailwindcss' and @theme block for custom moss-* colors"
+        },
+        {
+          "id": "subtask-2-2",
+          "description": "Create carbon fiber texture CSS patterns",
+          "service": "nextjs-frontend",
+          "files_to_modify": [
+            "app/globals.css"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "CSS carbon fiber texture patterns"
+          ],
+          "verification": {
+            "type": "browser",
+            "url": "http://localhost:3000",
+            "checks": [
+              "Carbon fiber texture visible in background"
+            ]
+          },
+          "status": "pending",
+          "notes": "Create .bg-carbon-fiber class with repeating CSS patterns"
+        },
+        {
+          "id": "subtask-2-3",
+          "description": "Configure tailwind.config.ts with extended theme",
+          "service": "nextjs-frontend",
+          "files_to_modify": [
+            "tailwind.config.ts"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "Tailwind CSS v4 configuration"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "npm run build",
+            "expected": "Build completes without Tailwind configuration errors"
+          },
+          "status": "pending",
+          "notes": "Extend theme with moss colors, custom fonts, animation keyframes"
+        },
+        {
+          "id": "subtask-2-4",
+          "description": "Update root layout with dark theme and fonts",
+          "service": "nextjs-frontend",
+          "files_to_modify": [
+            "app/layout.tsx"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "Next.js 15 App Router layout patterns"
+          ],
+          "verification": {
+            "type": "browser",
+            "url": "http://localhost:3000",
+            "checks": [
+              "Dark background visible",
+              "Custom fonts loading"
+            ]
+          },
+          "status": "pending",
+          "notes": "Set html className for dark mode, import fonts from next/font"
+        }
+      ]
+    },
+    {
+      "id": "phase-3-ui-components",
+      "name": "Base UI Components",
+      "type": "implementation",
+      "description": "Build reusable UI components: Button, Card, SectionWrapper",
+      "depends_on": [
+        "phase-2-design-system"
+      ],
+      "parallel_safe": true,
+      "subtasks": [
+        {
+          "id": "subtask-3-1",
+          "description": "Create Button component with variants and hover effects",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [
+            "components/ui/Button.tsx"
+          ],
+          "patterns_from": [
+            "React component patterns",
+            "Tailwind CSS button styling"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "npx tsc --noEmit",
+            "expected": "TypeScript compiles without errors"
+          },
+          "status": "pending",
+          "notes": "Create variants: primary (moss green), secondary (outline), with hover states"
+        },
+        {
+          "id": "subtask-3-2",
+          "description": "Create Card component for portfolio items",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [
+            "components/ui/Card.tsx"
+          ],
+          "patterns_from": [
+            "React component patterns"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "npx tsc --noEmit",
+            "expected": "TypeScript compiles without errors"
+          },
+          "status": "pending",
+          "notes": "Card with image, title, description, category badge, hover effects"
+        },
+        {
+          "id": "subtask-3-3",
+          "description": "Create SectionWrapper component for consistent section styling",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [
+            "components/ui/SectionWrapper.tsx"
+          ],
+          "patterns_from": [
+            "React component patterns"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "npx tsc --noEmit",
+            "expected": "TypeScript compiles without errors"
+          },
+          "status": "pending",
+          "notes": "Wrapper providing max-width, padding, optional background variants"
+        }
+      ]
+    },
+    {
+      "id": "phase-4-animation-components",
+      "name": "Animation Components",
+      "type": "implementation",
+      "description": "Build animation wrapper components using Motion and GSAP ScrollTrigger",
+      "depends_on": [
+        "phase-2-design-system"
+      ],
+      "parallel_safe": true,
+      "subtasks": [
+        {
+          "id": "subtask-4-1",
+          "description": "Create FadeIn animation wrapper component",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [
+            "components/animations/FadeIn.tsx"
+          ],
+          "patterns_from": [
+            "Motion whileInView API",
+            "spec.md animation patterns"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "npx tsc --noEmit",
+            "expected": "TypeScript compiles without errors"
+          },
+          "status": "pending",
+          "notes": "Client Component using Motion for fade-in on scroll. Props: direction, delay, duration. Respects prefers-reduced-motion."
+        },
+        {
+          "id": "subtask-4-2",
+          "description": "Create ParallaxSection wrapper component",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [
+            "components/animations/ParallaxSection.tsx"
+          ],
+          "patterns_from": [
+            "GSAP ScrollTrigger",
+            "useGSAP hook pattern from spec.md"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "npx tsc --noEmit",
+            "expected": "TypeScript compiles without errors"
+          },
+          "status": "pending",
+          "notes": "Client Component using GSAP ScrollTrigger for parallax effect. Uses useGSAP for cleanup. Disabled on mobile for performance."
+        }
+      ]
+    },
+    {
+      "id": "phase-5-data-layer",
+      "name": "Data Layer & Types",
+      "type": "implementation",
+      "description": "Create portfolio data structure and type definitions",
+      "depends_on": [
+        "phase-2-design-system"
+      ],
+      "parallel_safe": true,
+      "subtasks": [
+        {
+          "id": "subtask-5-1",
+          "description": "Create portfolio data types and sample data",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [
+            "lib/portfolio-data.ts"
+          ],
+          "patterns_from": [
+            "spec.md portfolio filtering pattern"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "npx tsc --noEmit",
+            "expected": "TypeScript compiles without errors"
+          },
+          "status": "pending",
+          "notes": "Define Project interface with id, title, category, image, description. Create sample projects array with categories: entertainment, automation, software."
+        }
+      ]
+    },
+    {
+      "id": "phase-6-sections",
+      "name": "Section Components",
+      "type": "implementation",
+      "description": "Build all 5 page section components: Hero, Services, Portfolio, About, Contact",
+      "depends_on": [
+        "phase-3-ui-components",
+        "phase-4-animation-components",
+        "phase-5-data-layer"
+      ],
+      "parallel_safe": false,
+      "subtasks": [
+        {
+          "id": "subtask-6-1",
+          "description": "Create Hero section with bold intro, tagline, and CTA",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [
+            "components/sections/Hero.tsx"
+          ],
+          "patterns_from": [
+            "FadeIn component",
+            "Button component"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "npx tsc --noEmit",
+            "expected": "TypeScript compiles without errors"
+          },
+          "status": "pending",
+          "notes": "Full viewport height, centered content, fade-in animation on load, CTA button linking to #contact"
+        },
+        {
+          "id": "subtask-6-2",
+          "description": "Create Services section showcasing 3 core offerings",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [
+            "components/sections/Services.tsx"
+          ],
+          "patterns_from": [
+            "Card component",
+            "FadeIn component",
+            "SectionWrapper"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "npx tsc --noEmit",
+            "expected": "TypeScript compiles without errors"
+          },
+          "status": "pending",
+          "notes": "Display 3 services: Rapid Prototyping, Automation Solutions, AI-Accelerated Development. Each with icon, title, description."
+        },
+        {
+          "id": "subtask-6-3",
+          "description": "Create Portfolio section with filtering and project grid",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [
+            "components/sections/Portfolio.tsx"
+          ],
+          "patterns_from": [
+            "spec.md Portfolio filtering pattern",
+            "Card component",
+            "portfolio-data.ts"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "npx tsc --noEmit",
+            "expected": "TypeScript compiles without errors"
+          },
+          "status": "pending",
+          "notes": "Client Component with filter state. Categories: all, entertainment, automation, software. Grid of project cards with hover effects. Handle empty filter state."
+        },
+        {
+          "id": "subtask-6-4",
+          "description": "Create About/Bio section with career history",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [
+            "components/sections/About.tsx"
+          ],
+          "patterns_from": [
+            "SectionWrapper",
+            "FadeIn component"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "npx tsc --noEmit",
+            "expected": "TypeScript compiles without errors"
+          },
+          "status": "pending",
+          "notes": "Professional bio for Nicolas Robert Myers. Career highlights, credentials. Clean typography hierarchy."
+        },
+        {
+          "id": "subtask-6-5",
+          "description": "Create Contact section with inquiry form or direct info",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [
+            "components/sections/Contact.tsx"
+          ],
+          "patterns_from": [
+            "Button component",
+            "SectionWrapper"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "npx tsc --noEmit",
+            "expected": "TypeScript compiles without errors"
+          },
+          "status": "pending",
+          "notes": "Contact form with name, email, message fields OR direct contact info display. Client-side validation if form used."
+        }
+      ]
+    },
+    {
+      "id": "phase-7-composition",
+      "name": "Page Composition",
+      "type": "implementation",
+      "description": "Wire all section components together in the main page",
+      "depends_on": [
+        "phase-6-sections"
+      ],
+      "parallel_safe": false,
+      "subtasks": [
+        {
+          "id": "subtask-7-1",
+          "description": "Compose all sections in app/page.tsx",
+          "service": "nextjs-frontend",
+          "files_to_modify": [
+            "app/page.tsx"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "Next.js 15 App Router page patterns"
+          ],
+          "verification": {
+            "type": "browser",
+            "url": "http://localhost:3000",
+            "checks": [
+              "All 5 sections render in correct order",
+              "Smooth scrolling between sections",
+              "No console errors"
+            ]
+          },
+          "status": "pending",
+          "notes": "Import and render: Hero, Services, Portfolio, About, Contact. Each section has id for anchor navigation."
+        },
+        {
+          "id": "subtask-7-2",
+          "description": "Add smooth scroll behavior and section anchors",
+          "service": "nextjs-frontend",
+          "files_to_modify": [
+            "app/globals.css",
+            "app/page.tsx"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "CSS scroll-behavior: smooth"
+          ],
+          "verification": {
+            "type": "browser",
+            "url": "http://localhost:3000",
+            "checks": [
+              "Clicking Hero CTA smoothly scrolls to Contact section"
+            ]
+          },
+          "status": "pending",
+          "notes": "Add scroll-behavior: smooth to html. Ensure each section has correct id attribute."
+        }
+      ]
+    },
+    {
+      "id": "phase-8-integration",
+      "name": "Integration & Verification",
+      "type": "integration",
+      "description": "Final testing, lint fixes, build verification, and polish",
+      "depends_on": [
+        "phase-7-composition"
+      ],
+      "parallel_safe": false,
+      "subtasks": [
+        {
+          "id": "subtask-8-1",
+          "description": "Verify all animations work correctly",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [],
+          "patterns_from": [],
+          "verification": {
+            "type": "browser",
+            "url": "http://localhost:3000",
+            "checks": [
+              "Fade-in animations trigger on scroll",
+              "Parallax effects work smoothly",
+              "Hover effects on cards and buttons",
+              "No animation jank"
+            ]
+          },
+          "status": "pending",
+          "notes": "Test all animations on desktop. Verify reduced-motion is respected."
+        },
+        {
+          "id": "subtask-8-2",
+          "description": "Verify portfolio filtering functionality",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [],
+          "patterns_from": [],
+          "verification": {
+            "type": "browser",
+            "url": "http://localhost:3000#portfolio",
+            "checks": [
+              "All filter buttons work",
+              "Correct projects shown for each category",
+              "Smooth filter transitions",
+              "Empty state shows message"
+            ]
+          },
+          "status": "pending",
+          "notes": "Test each category filter: all, entertainment, automation, software."
+        },
+        {
+          "id": "subtask-8-3",
+          "description": "Run ESLint and fix any issues",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [],
+          "patterns_from": [],
+          "verification": {
+            "type": "command",
+            "command": "npm run lint",
+            "expected": "No ESLint errors"
+          },
+          "status": "pending",
+          "notes": "Fix any linting issues. Ensure consistent code style."
+        },
+        {
+          "id": "subtask-8-4",
+          "description": "Run production build and verify success",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [],
+          "patterns_from": [],
+          "verification": {
+            "type": "command",
+            "command": "npm run build",
+            "expected": "Build completes successfully with no TypeScript or build errors"
+          },
+          "status": "pending",
+          "notes": "Verify production build works. Check for any TypeScript errors."
+        },
+        {
+          "id": "subtask-8-5",
+          "description": "Verify responsive design across viewports",
+          "service": "nextjs-frontend",
+          "files_to_modify": [],
+          "files_to_create": [],
+          "patterns_from": [],
+          "verification": {
+            "type": "browser",
+            "url": "http://localhost:3000",
+            "checks": [
+              "Mobile viewport (320px): Content readable, no horizontal scroll",
+              "Tablet viewport (768px): Layout adapts correctly",
+              "Desktop viewport (1024px+): Full layout visible",
+              "Parallax disabled on mobile"
+            ]
+          },
+          "status": "pending",
+          "notes": "Test responsive design at 320px, 768px, and 1024px+ viewports."
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_phases": 8,
+    "total_subtasks": 22,
+    "services_involved": [
+      "nextjs-frontend"
+    ],
+    "estimated_files_to_create": 15,
+    "estimated_files_to_modify": 5,
+    "parallelism": {
+      "max_parallel_phases": 3,
+      "parallel_groups": [
+        {
+          "phases": [
+            "phase-3-ui-components",
+            "phase-4-animation-components",
+            "phase-5-data-layer"
+          ],
+          "reason": "All depend only on phase-2-design-system, no file conflicts between them"
+        }
+      ],
+      "recommended_workers": 1,
+      "speedup_estimate": "Parallel phases 3-5 can run concurrently for ~1.3x speedup"
+    },
+    "startup_command": "source auto-claude/.venv/bin/activate && python auto-claude/run.py --spec 001 --parallel 1"
+  },
+  "verification_strategy": {
+    "risk_level": "low",
+    "skip_validation": false,
+    "test_creation_phase": "post_implementation",
+    "test_types_required": [
+      "unit"
+    ],
+    "security_scanning_required": false,
+    "staging_deployment_required": false,
+    "acceptance_criteria": [
+      "Project initializes and runs without errors (npm run dev)",
+      "All 5 sections render correctly (Hero, Services, Portfolio, About, Contact)",
+      "Dark mossy green color scheme applied consistently",
+      "Carbon fiber texture visible in design",
+      "Parallax scrolling effects work smoothly",
+      "Fade-in animations trigger on scroll",
+      "Portfolio filtering works for all categories",
+      "Hover effects present on interactive elements",
+      "Site is responsive (mobile, tablet, desktop)",
+      "No console errors in browser",
+      "ESLint passes (npm run lint)",
+      "TypeScript compiles without errors (npm run build)"
+    ],
+    "verification_steps": [
+      {
+        "name": "TypeScript Compile",
+        "command": "npx tsc --noEmit",
+        "expected_outcome": "No TypeScript errors",
+        "type": "test",
+        "required": true,
+        "blocking": true
+      },
+      {
+        "name": "ESLint Check",
+        "command": "npm run lint",
+        "expected_outcome": "No linting errors",
+        "type": "test",
+        "required": true,
+        "blocking": true
+      },
+      {
+        "name": "Production Build",
+        "command": "npm run build",
+        "expected_outcome": "Build completes successfully",
+        "type": "test",
+        "required": true,
+        "blocking": true
+      }
+    ],
+    "reasoning": "Low risk greenfield portfolio website with no sensitive data handling, authentication, or database. Contact form is the only user input. Minimal testing mode appropriate as no security-critical features."
+  },
+  "qa_acceptance": {
+    "unit_tests": {
+      "required": false,
+      "commands": [],
+      "minimum_coverage": null,
+      "notes": "Unit tests optional for low-risk portfolio site. Focus on manual browser verification."
+    },
+    "integration_tests": {
+      "required": false,
+      "commands": [],
+      "services_to_test": []
+    },
+    "e2e_tests": {
+      "required": false,
+      "commands": [],
+      "flows": []
+    },
+    "browser_verification": {
+      "required": true,
+      "pages": [
+        {
+          "url": "http://localhost:3000",
+          "checks": [
+            "All sections render",
+            "Animations work",
+            "No console errors"
+          ]
+        },
+        {
+          "url": "http://localhost:3000#portfolio",
+          "checks": [
+            "Portfolio grid displays",
+            "Filtering works"
+          ]
+        },
+        {
+          "url": "http://localhost:3000#contact",
+          "checks": [
+            "Contact section visible"
+          ]
+        }
+      ]
+    },
+    "build_verification": {
+      "required": true,
+      "checks": [
+        "npm run build succeeds",
+        "npm run lint passes",
+        "TypeScript compiles"
+      ]
+    },
+    "responsive_verification": {
+      "required": true,
+      "viewports": [
+        "320px (mobile)",
+        "768px (tablet)",
+        "1024px+ (desktop)"
+      ]
+    }
+  },
+  "qa_signoff": null,
+  "created_at": "2026-01-02T08:47:50.356Z",
+  "updated_at": "2026-01-02T20:06:38.014Z",
+  "status": "in_progress",
+  "planStatus": "in_progress",
+  "last_updated": "2026-01-02T19:54:05.401043+00:00"
+}

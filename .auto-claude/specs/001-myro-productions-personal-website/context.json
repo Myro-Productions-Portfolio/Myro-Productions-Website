@@ -1,0 +1,70 @@
+{
+  "task_description": "Build Myro Productions personal portfolio website - a single-page Next.js application with 5 sections (Hero, Services, Portfolio, About, Contact), featuring dark mossy green color palette, carbon fiber textures, parallax scrolling, and smooth animations.",
+  "scoped_services": ["nextjs-frontend"],
+  "files_to_create": {
+    "P0_setup": [
+      "app/layout.tsx",
+      "app/page.tsx",
+      "app/globals.css",
+      "tailwind.config.ts",
+      "postcss.config.mjs"
+    ],
+    "P1_sections": [
+      "components/sections/Hero.tsx",
+      "components/sections/Services.tsx",
+      "components/sections/Portfolio.tsx",
+      "components/sections/About.tsx",
+      "components/sections/Contact.tsx"
+    ],
+    "P2_ui": [
+      "components/ui/Button.tsx",
+      "components/ui/Card.tsx",
+      "components/ui/SectionWrapper.tsx"
+    ],
+    "P2_animations": [
+      "components/animations/FadeIn.tsx",
+      "components/animations/ParallaxSection.tsx"
+    ],
+    "P2_data": [
+      "lib/portfolio-data.ts"
+    ]
+  },
+  "files_to_reference": [
+    "Official Next.js 15 App Router documentation",
+    "Tailwind CSS v4 documentation (@import syntax)",
+    "Motion (Framer Motion) React documentation",
+    "GSAP ScrollTrigger and useGSAP documentation"
+  ],
+  "patterns": {
+    "server_vs_client": "Server Components by default; use 'use client' directive only for interactive components (animations, filters, forms)",
+    "tailwind_v4_import": "Use @import 'tailwindcss' NOT @tailwind directives; define custom theme in @theme block",
+    "gsap_cleanup": "Always use useGSAP hook for automatic cleanup; register plugins before use",
+    "animation_components": "Create wrapper components for FadeIn and Parallax to encapsulate animation logic"
+  },
+  "existing_implementations": {
+    "description": "Greenfield project - no existing code. Following Next.js 15, Tailwind v4, Motion, and GSAP best practices from official documentation.",
+    "relevant_files": []
+  },
+  "tech_decisions": {
+    "framework": "Next.js v15+ with App Router",
+    "language": "TypeScript",
+    "styling": "Tailwind CSS v4 with PostCSS",
+    "animations": "Motion for UI interactions, GSAP+ScrollTrigger for parallax",
+    "runtime": "Node.js v20.9+"
+  },
+  "design_system": {
+    "colors": {
+      "moss-900": "#1a2e1a",
+      "moss-800": "#243524",
+      "moss-700": "#2e3f2e",
+      "moss-600": "#3d503d",
+      "moss-500": "#4a5f4a",
+      "carbon": "#1c1c1c",
+      "carbon-light": "#2a2a2a"
+    },
+    "aesthetic": "Tactical, premium, tech-forward",
+    "typography": "Clean modern sans-serif with strong hierarchy",
+    "textures": "Carbon fiber background patterns via CSS"
+  },
+  "created_at": "2026-01-02T03:52:28.116680"
+}
