@@ -74,10 +74,23 @@ export default function PortfolioCard({ project, index = 0 }: PortfolioCardProps
 
       {/* Content */}
       <div className="p-6">
-        {/* Category Tag */}
-        <span className="inline-block px-3 py-1 bg-moss-700 text-accent text-xs font-medium rounded-full mb-3 capitalize">
-          {project.category}
-        </span>
+        {/* Category & Status Tags */}
+        <div className="flex flex-wrap gap-2 mb-3">
+          <span className="inline-block px-3 py-1 bg-moss-700 text-accent text-xs font-medium rounded-full capitalize">
+            {project.category}
+          </span>
+          {project.status && (
+            <span className={`inline-block px-3 py-1 text-xs font-medium rounded-full ${
+              project.status === 'in-progress'
+                ? 'bg-amber-900/50 text-amber-400'
+                : project.status === 'planning'
+                ? 'bg-blue-900/50 text-blue-400'
+                : 'bg-green-900/50 text-green-400'
+            }`}>
+              {project.status === 'in-progress' ? 'In Progress' : project.status === 'planning' ? 'Planning' : 'Completed'}
+            </span>
+          )}
+        </div>
 
         {/* Title */}
         <h3 className="text-xl font-bold text-text-primary mb-2 group-hover:text-accent transition-colors duration-300 break-words">

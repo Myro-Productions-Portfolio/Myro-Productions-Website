@@ -4,7 +4,8 @@ import Services from '@/components/sections/Services'
 import Process from '@/components/sections/Process'
 import Portfolio from '@/components/sections/Portfolio'
 import About from '@/components/sections/About'
-import Testimonials from '@/components/sections/Testimonials'
+// Testimonials hidden until client feedback is collected
+// import Testimonials from '@/components/sections/Testimonials'
 import Pricing from '@/components/sections/Pricing'
 import FAQ from '@/components/sections/FAQ'
 import Contact from '@/components/sections/Contact'
@@ -43,7 +44,7 @@ export default function Home() {
       <Process />
       <Portfolio />
       <About />
-      <Testimonials />
+      {/* <Testimonials /> - Hidden until client feedback is collected */}
       <Pricing />
       <FAQ />
       <Contact />
