@@ -26,9 +26,9 @@ const skills = [
 ];
 
 const highlights = [
-  { label: 'Years Experience', value: '10+' },
-  { label: 'Projects Delivered', value: '50+' },
-  { label: 'Client Satisfaction', value: '100%' },
+  { label: 'Years in AV Industry', value: '13+' },
+  { label: 'Dev Experience', value: '6 mo' },
+  { label: 'Projects In Progress', value: '5+' },
   { label: 'Coffee Consumed', value: '∞' },
 ];
 
