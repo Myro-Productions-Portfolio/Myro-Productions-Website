@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { verifySession, getSessionCookieName } from '@/lib/auth/session';
 
 /**
  * Security headers for all responses
@@ -55,6 +56,33 @@ export async function middleware(request: NextRequest) {
   // if (!isAllowed) {
   //   return new NextResponse('Too Many Requests', { status: 429 });
   // }
+
+  const { pathname } = request.nextUrl;
+
+  // Check if this is an admin route (except login and API routes)
+  const isAdminRoute = pathname.startsWith('/admin');
+  const isLoginPage = pathname === '/admin/login';
+  const isAuthAPI = pathname.startsWith('/api/admin/auth');
+
+  // Protect admin routes (except login page and auth API)
+  if (isAdminRoute && !isLoginPage && !isAuthAPI) {
+    const user = await verifySession(request);
+
+    if (!user) {
+      // Redirect to login page with return URL
+      const loginUrl = new URL('/admin/login', request.url);
+      loginUrl.searchParams.set('redirect', pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+
+  // Redirect to dashboard if already logged in and trying to access login page
+  if (isLoginPage) {
+    const user = await verifySession(request);
+    if (user) {
+      return NextResponse.redirect(new URL('/admin', request.url));
+    }
+  }
 
   // Get the response
   const response = NextResponse.next();
