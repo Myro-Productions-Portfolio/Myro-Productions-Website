@@ -372,9 +372,9 @@ export default function Contact() {
                 Email
               </h3>
               <a
-                href="mailto:hello@myroproductions.com"
+                href="mailto:pmnicolasm@gmail.com"
                 className="text-xl text-accent hover:text-accent-light focus-visible:text-accent-light transition-colors duration-300 inline-flex items-center gap-2 group rounded px-1 -mx-1"
-                aria-label="Email hello@myroproductions.com"
+                aria-label="Email pmnicolasm@gmail.com"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -391,7 +391,7 @@ export default function Contact() {
                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                   />
                 </svg>
-                hello@myroproductions.com
+                pmnicolasm@gmail.com
               </a>
               <p className="text-sm text-text-secondary mt-3">
                 Usually responds within 24 hours
@@ -740,10 +740,10 @@ export default function Contact() {
                     <p>
                       Something went wrong. Please try again or email me directly at{' '}
                       <a
-                        href="mailto:hello@myroproductions.com"
+                        href="mailto:pmnicolasm@gmail.com"
                         className="underline hover:text-red-100"
                       >
-                        hello@myroproductions.com
+                        pmnicolasm@gmail.com
                       </a>
                     </p>
                   </div>

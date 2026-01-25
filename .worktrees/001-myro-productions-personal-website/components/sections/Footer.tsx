@@ -192,10 +192,10 @@ export default function Footer() {
               <div>
                 <p className="font-medium text-text-primary mb-1">Email</p>
                 <a
-                  href="mailto:hello@myroproductions.com"
+                  href="mailto:pmnicolasm@gmail.com"
                   className="hover:text-accent focus-visible:text-accent transition-colors duration-300 rounded px-1 -mx-1 inline-block"
                 >
-                  hello@myroproductions.com
+                  pmnicolasm@gmail.com
                 </a>
               </div>
               <div>

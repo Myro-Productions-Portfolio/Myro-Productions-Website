@@ -36,10 +36,10 @@ export default function PaymentCancelledPage() {
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-6">
             Questions? Email us at{' '}
             <a
-              href="mailto:hello@myroproductions.com"
+              href="mailto:pmnicolasm@gmail.com"
               className="text-blue-600 dark:text-blue-400 hover:underline"
             >
-              hello@myroproductions.com
+              pmnicolasm@gmail.com
             </a>
           </p>
         </div>
