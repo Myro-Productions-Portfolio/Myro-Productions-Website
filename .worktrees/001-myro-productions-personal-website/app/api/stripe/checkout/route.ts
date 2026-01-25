@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripe, PaymentMetadata } from '@/lib/stripe/config';
+import { calculateApplicationFee } from '@/lib/stripe/connect';
 import { z } from 'zod';
 
 const checkoutSchema = z.object({
@@ -11,6 +12,9 @@ const checkoutSchema = z.object({
   quoteId: z.string().optional(),
   successUrl: z.string().url().optional(),
   cancelUrl: z.string().url().optional(),
+  // Platform payments (optional)
+  connectedAccountId: z.string().optional(), // For platform marketplace payments
+  applicationFeePercent: z.number().min(0).max(1).optional(), // Override default fee
 });
 
 export async function POST(request: NextRequest) {
@@ -27,6 +31,8 @@ export async function POST(request: NextRequest) {
       quoteId,
       successUrl,
       cancelUrl,
+      connectedAccountId,
+      applicationFeePercent,
     } = validated;
 
     // Build metadata
@@ -36,10 +42,25 @@ export async function POST(request: NextRequest) {
       customerName,
       ...(description && { description }),
       ...(quoteId && { quoteId }),
+      ...(connectedAccountId && { connectedAccountId }),
     };
 
     // Determine mode based on payment type
     const mode = paymentType === 'subscription' ? 'subscription' : 'payment';
+
+    // Get price to calculate application fee
+    let amount = 0;
+    if (connectedAccountId) {
+      const price = await stripe.prices.retrieve(priceId);
+      amount = price.unit_amount || 0;
+    }
+
+    // Calculate application fee if this is a connected account payment
+    const applicationFee = connectedAccountId && amount > 0
+      ? applicationFeePercent
+        ? Math.round(amount * applicationFeePercent)
+        : calculateApplicationFee(amount)
+      : undefined;
 
     // Create checkout session
     const session = await stripe.checkout.sessions.create({
@@ -59,6 +80,17 @@ export async function POST(request: NextRequest) {
       ...(paymentType === 'subscription' && {
         subscription_data: {
           metadata,
+          ...(connectedAccountId && {
+            application_fee_percent: (applicationFeePercent || 0.15) * 100, // Convert to percentage
+          }),
+        },
+      }),
+      ...(connectedAccountId && paymentType !== 'subscription' && {
+        payment_intent_data: {
+          application_fee_amount: applicationFee,
+          transfer_data: {
+            destination: connectedAccountId,
+          },
         },
       }),
     });
