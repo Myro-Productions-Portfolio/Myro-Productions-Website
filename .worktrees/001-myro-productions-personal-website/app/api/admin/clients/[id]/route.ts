@@ -33,7 +33,8 @@ export async function GET(
 ) {
   try {
     // Verify authentication
-    await requireAuthFromCookies();
+    const admin = await requireAuthFromCookies();
+    if (admin instanceof NextResponse) return admin;
 
     const { id } = await params;
 
@@ -81,13 +82,6 @@ export async function GET(
   } catch (error) {
     console.error('Get client error:', error);
 
-    if (error instanceof Error && error.message === 'Unauthorized') {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
-
     return NextResponse.json(
       { success: false, error: 'Failed to fetch client' },
       { status: 500 }
@@ -107,6 +101,7 @@ export async function PUT(
   try {
     // Verify authentication
     const admin = await requireAuthFromCookies();
+    if (admin instanceof NextResponse) return admin;
 
     const { id } = await params;
 
@@ -170,13 +165,6 @@ export async function PUT(
   } catch (error) {
     console.error('Update client error:', error);
 
-    if (error instanceof Error && error.message === 'Unauthorized') {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
-
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { success: false, error: error.errors[0].message },
@@ -203,6 +191,7 @@ export async function DELETE(
   try {
     // Verify authentication
     const admin = await requireAuthFromCookies();
+    if (admin instanceof NextResponse) return admin;
 
     const { id } = await params;
 
@@ -243,13 +232,6 @@ export async function DELETE(
     });
   } catch (error) {
     console.error('Delete client error:', error);
-
-    if (error instanceof Error && error.message === 'Unauthorized') {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
 
     return NextResponse.json(
       { success: false, error: 'Failed to deactivate client' },

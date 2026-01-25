@@ -30,7 +30,8 @@ const querySchema = z.object({
 export async function GET(request: NextRequest) {
   try {
     // Verify authentication
-    await requireAuthFromCookies();
+    const admin = await requireAuthFromCookies();
+    if (admin instanceof NextResponse) return admin;
 
     // Parse and validate query parameters
     const searchParams = Object.fromEntries(request.nextUrl.searchParams);
@@ -146,13 +147,6 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error('List payments error:', error);
-
-    if (error instanceof Error && error.message === 'Unauthorized') {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(

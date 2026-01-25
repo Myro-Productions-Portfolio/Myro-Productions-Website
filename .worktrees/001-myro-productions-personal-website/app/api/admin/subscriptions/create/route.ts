@@ -28,6 +28,7 @@ export async function POST(request: NextRequest) {
   try {
     // Verify authentication
     const admin = await requireAuthFromCookies();
+    if (admin instanceof NextResponse) return admin;
 
     // Parse and validate request body
     const body = await request.json();
@@ -138,13 +139,6 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     console.error('Create subscription error:', error);
-
-    if (error instanceof Error && error.message === 'Unauthorized') {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(

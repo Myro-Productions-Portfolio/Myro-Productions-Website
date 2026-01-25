@@ -4,6 +4,7 @@
  * Main dashboard overview with statistics and recent activity
  */
 
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { verifySessionFromCookies } from '@/lib/auth/session';
 import { prisma } from '@/lib/prisma';
@@ -247,8 +248,9 @@ export default async function AdminDashboardPage() {
           Quick Actions
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <a
+          <Link
             href="/admin/clients"
+            prefetch={false}
             className="p-4 bg-carbon rounded-lg border border-carbon-light hover:border-moss-700 hover:bg-carbon-light transition-all text-center group"
           >
             <svg
@@ -268,10 +270,11 @@ export default async function AdminDashboardPage() {
             <p className="text-text-secondary text-xs mt-1">
               Create a new client profile
             </p>
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="/admin/projects"
+            prefetch={false}
             className="p-4 bg-carbon rounded-lg border border-carbon-light hover:border-moss-700 hover:bg-carbon-light transition-all text-center group"
           >
             <svg
@@ -291,10 +294,11 @@ export default async function AdminDashboardPage() {
             <p className="text-text-secondary text-xs mt-1">
               Start a new project
             </p>
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="/admin/payments"
+            prefetch={false}
             className="p-4 bg-carbon rounded-lg border border-carbon-light hover:border-moss-700 hover:bg-carbon-light transition-all text-center group"
           >
             <svg
@@ -314,7 +318,7 @@ export default async function AdminDashboardPage() {
             <p className="text-text-secondary text-xs mt-1">
               Review payment history
             </p>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -45,7 +45,7 @@ export default function Sidebar() {
         {/* Logo/Brand */}
         <div className="flex h-16 items-center justify-between px-4 border-b border-carbon-light">
           {!isCollapsed && (
-            <Link href="/admin" className="flex items-center space-x-2">
+            <Link href="/admin" prefetch={false} className="flex items-center space-x-2">
               <span className="text-xl font-bold text-text-primary">
                 Myro Admin
               </span>
@@ -75,6 +75,7 @@ export default function Sidebar() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    prefetch={false}
                     className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
                       isActive
                         ? 'bg-moss-700 text-text-primary'
@@ -105,6 +106,7 @@ export default function Sidebar() {
               <li key={item.href}>
                 <Link
                   href={item.href}
+                  prefetch={false}
                   className={`flex flex-col items-center space-y-1 px-3 py-2 rounded-lg transition-colors ${
                     isActive
                       ? 'text-accent'

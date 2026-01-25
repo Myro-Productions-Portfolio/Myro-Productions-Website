@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { Lock } from 'lucide-react';
 import LinkedInIcon from '@/components/icons/LinkedInIcon';
 import GitHubIcon from '@/components/icons/GitHubIcon';
 import TwitterIcon from '@/components/icons/TwitterIcon';
@@ -247,6 +248,19 @@ export default function Footer() {
               </button>
             </div>
           </div>
+        </div>
+
+        {/* Admin Login - Discrete utility link */}
+        <div className="mt-8 pt-6 border-t border-carbon-lighter/50 flex justify-center">
+          <Link
+            href="/admin/login"
+            prefetch={false}
+            aria-label="Administrator login"
+            className="inline-flex items-center gap-2 text-sm text-text-muted hover:text-accent transition-colors duration-300 rounded px-3 py-2"
+          >
+            <Lock className="w-4 h-4" />
+            <span>Admin Login</span>
+          </Link>
         </div>
       </div>
     </footer>

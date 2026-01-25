@@ -16,7 +16,8 @@ import { prisma } from '@/lib/prisma';
 export async function GET(request: NextRequest) {
   try {
     // Verify authentication
-    await requireAuthFromCookies();
+    const admin = await requireAuthFromCookies();
+    if (admin instanceof NextResponse) return admin;
 
     // Get current date and calculate date ranges
     const now = new Date();
@@ -272,13 +273,6 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error('Dashboard stats error:', error);
-
-    if (error instanceof Error && error.message === 'Unauthorized') {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
 
     return NextResponse.json(
       { success: false, error: 'Failed to fetch dashboard statistics' },

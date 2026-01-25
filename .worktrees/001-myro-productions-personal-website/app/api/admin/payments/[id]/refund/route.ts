@@ -30,6 +30,7 @@ export async function POST(
   try {
     // Verify authentication
     const admin = await requireAuthFromCookies();
+    if (admin instanceof NextResponse) return admin;
 
     const { id } = await params;
 
@@ -189,13 +190,6 @@ export async function POST(
     });
   } catch (error) {
     console.error('Refund payment error:', error);
-
-    if (error instanceof Error && error.message === 'Unauthorized') {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(

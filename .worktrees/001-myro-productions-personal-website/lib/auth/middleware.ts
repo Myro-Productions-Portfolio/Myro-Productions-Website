@@ -29,14 +29,16 @@ export async function requireAuth(request: NextRequest): Promise<AdminUser | Nex
 /**
  * Require authentication for a route handler (for API routes and Server Components)
  *
- * @returns Promise that resolves to the admin user or throws an error
- * @throws Error if user is not authenticated
+ * @returns Promise that resolves to the admin user or a NextResponse error
  */
-export async function requireAuthFromCookies(): Promise<AdminUser> {
+export async function requireAuthFromCookies(): Promise<AdminUser | NextResponse> {
   const user = await verifySessionFromCookies();
 
   if (!user) {
-    throw new Error('Unauthorized');
+    return NextResponse.json(
+      { success: false, error: 'Unauthorized' },
+      { status: 401 }
+    );
   }
 
   return user;

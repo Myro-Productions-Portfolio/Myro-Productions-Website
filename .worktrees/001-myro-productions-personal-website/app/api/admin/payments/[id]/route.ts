@@ -19,7 +19,8 @@ export async function GET(
 ) {
   try {
     // Verify authentication
-    await requireAuthFromCookies();
+    const admin = await requireAuthFromCookies();
+    if (admin instanceof NextResponse) return admin;
 
     const { id } = await params;
 
@@ -71,13 +72,6 @@ export async function GET(
     });
   } catch (error) {
     console.error('Get payment error:', error);
-
-    if (error instanceof Error && error.message === 'Unauthorized') {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
 
     return NextResponse.json(
       { success: false, error: 'Failed to fetch payment' },
