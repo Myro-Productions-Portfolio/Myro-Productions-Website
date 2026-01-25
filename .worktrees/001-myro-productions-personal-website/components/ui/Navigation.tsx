@@ -15,6 +15,7 @@ const navLinks: NavLink[] = [
   { label: 'Home', href: '#home' },
   { label: 'Services', href: '#services' },
   { label: 'Portfolio', href: '#portfolio' },
+  { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -66,8 +67,14 @@ export default function Navigation() {
     return () => observer.disconnect();
   }, []);
 
-  // Smooth scroll to section
+  // Smooth scroll to section (only for anchor links)
   const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Only prevent default for anchor links (starting with #)
+    if (!href.startsWith('#')) {
+      setIsMobileMenuOpen(false);
+      return;
+    }
+
     e.preventDefault();
     const sectionId = href.replace('#', '');
     const element = document.getElementById(sectionId);
