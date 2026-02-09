@@ -64,3 +64,7 @@ temp/
 *.key
 credentials.json
 secrets.json
+
+# Claude Code context files
+CLAUDE.md
+CLAUDELONGTERM.md
