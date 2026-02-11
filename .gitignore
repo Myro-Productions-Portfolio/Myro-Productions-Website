@@ -20,6 +20,8 @@ out/
 # IDE and editor
 .idea/
 .vscode/
+.kiro/
+*.code-workspace
 *.swp
 *.swo
 *~
