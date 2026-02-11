@@ -1,10 +1,10 @@
 # Myro Productions Website
 
-Official website for Myro Productions - Professional AV Event Production Services.
+Official website for Myro Productions - Cloud, AI & Web Development Services.
 
 ## Overview
 
-This project contains the source code and assets for the Myro Productions website, showcasing professional audio-visual event production services.
+This project contains the source code and assets for the Myro Productions website, showcasing AWS cloud services, AI development, home lab consulting, and web solutions.
 
 ## Tech Stack
 
@@ -83,4 +83,4 @@ The project scaffold has been created with:
 
 ## Contact
 
-Myro Productions - Professional AV Event Services
+Myro Productions - Cloud, AI & Web Solutions

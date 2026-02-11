@@ -27,7 +27,7 @@ import { z } from 'zod';
 const CALENDLY_WEBHOOK_SIGNING_KEY = process.env.CALENDLY_WEBHOOK_SIGNING_KEY || '';
 const WEB3FORMS_ACCESS_KEY = process.env.WEB3FORMS_ACCESS_KEY || '';
 const AI_COMMAND_CENTER_URL = process.env.AI_COMMAND_CENTER_URL || 'http://localhost:3939/api/contacts';
-const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'hello@myroproductions.com';
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'nmyers@myroproductions.com';
 
 // Event deduplication store
 // Tracks processed webhook event IDs to prevent duplicate processing

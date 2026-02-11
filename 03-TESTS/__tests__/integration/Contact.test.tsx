@@ -43,7 +43,7 @@ describe('Contact Section Integration', () => {
       // Use getAllByText for multiple "Email" elements (heading and form label)
       const emailElements = screen.getAllByText('Email');
       expect(emailElements.length).toBeGreaterThan(0);
-      expect(screen.getByText('hello@myroproductions.com')).toBeInTheDocument();
+      expect(screen.getByText('nmyers@myroproductions.com')).toBeInTheDocument();
       expect(screen.getByText('Usually responds within 24 hours')).toBeInTheDocument();
     });
 
@@ -60,8 +60,8 @@ describe('Contact Section Integration', () => {
 
     it('email link has correct mailto href', () => {
       render(<Contact />);
-      const emailLink = screen.getByText('hello@myroproductions.com');
-      expect(emailLink).toHaveAttribute('href', 'mailto:hello@myroproductions.com');
+      const emailLink = screen.getByText('nmyers@myroproductions.com');
+      expect(emailLink).toHaveAttribute('href', 'mailto:nmyers@myroproductions.com');
     });
   });
 

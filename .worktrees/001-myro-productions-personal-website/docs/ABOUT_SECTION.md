@@ -1,7 +1,7 @@
 # About Section - Implementation Summary
 
 ## Overview
-The About/Bio section (`#about`) showcases Nicolas Robert Myers's background, expertise, and professional journey from AV event production to software development.
+The About/Bio section (`#about`) showcases Nicolas Robert Myers's background, expertise, and professional journey into cloud services, AI development, and web solutions.
 
 ## Components Created
 

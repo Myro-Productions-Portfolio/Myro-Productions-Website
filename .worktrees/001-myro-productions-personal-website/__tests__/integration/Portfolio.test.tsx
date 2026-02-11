@@ -32,25 +32,25 @@ describe('Portfolio Integration', () => {
     render(<Portfolio />);
 
     // Check that multiple projects are rendered
-    expect(screen.getByText('Live Concert AV System')).toBeInTheDocument();
     expect(screen.getByText('AI Command Center')).toBeInTheDocument();
-    expect(screen.getByText('QuoteMyAV Platform')).toBeInTheDocument();
+    expect(screen.getByText('ShowCore')).toBeInTheDocument();
+    expect(screen.getByText('AWS Training Dashboard')).toBeInTheDocument();
   });
 
-  it('filters projects when Entertainment button is clicked', async () => {
+  it('filters projects when Infrastructure button is clicked', async () => {
     render(<Portfolio />);
 
-    const entertainmentButton = screen.getByText('Entertainment');
-    fireEvent.click(entertainmentButton);
+    const infrastructureButton = screen.getByText('Infrastructure');
+    fireEvent.click(infrastructureButton);
 
     await waitFor(() => {
-      // Entertainment projects should be visible
-      expect(screen.getByText('Live Concert AV System')).toBeInTheDocument();
-      expect(screen.getByText('Festival Stage Management')).toBeInTheDocument();
+      // Infrastructure projects should be visible
+      expect(screen.getByText('AWS Training Dashboard')).toBeInTheDocument();
+      expect(screen.getByText('DGX Spark Management')).toBeInTheDocument();
 
-      // Non-entertainment projects should not be visible
+      // Non-infrastructure projects should not be visible
       expect(screen.queryByText('AI Command Center')).not.toBeInTheDocument();
-      expect(screen.queryByText('Warehouse Inventory Automation')).not.toBeInTheDocument();
+      expect(screen.queryByText('Claudarity')).not.toBeInTheDocument();
     });
   });
 
@@ -62,12 +62,12 @@ describe('Portfolio Integration', () => {
 
     await waitFor(() => {
       // Automation projects should be visible
-      expect(screen.getByText('Warehouse Inventory Automation')).toBeInTheDocument();
-      expect(screen.getByText('Document Processing Pipeline')).toBeInTheDocument();
+      expect(screen.getByText('Claudarity')).toBeInTheDocument();
+      expect(screen.getByText('Auto-Claude')).toBeInTheDocument();
 
       // Non-automation projects should not be visible
-      expect(screen.queryByText('Live Concert AV System')).not.toBeInTheDocument();
-      expect(screen.queryByText('QuoteMyAV Platform')).not.toBeInTheDocument();
+      expect(screen.queryByText('AI Command Center')).not.toBeInTheDocument();
+      expect(screen.queryByText('AWS Training Dashboard')).not.toBeInTheDocument();
     });
   });
 
@@ -80,11 +80,11 @@ describe('Portfolio Integration', () => {
     await waitFor(() => {
       // Software projects should be visible
       expect(screen.getByText('AI Command Center')).toBeInTheDocument();
-      expect(screen.getByText('QuoteMyAV Platform')).toBeInTheDocument();
+      expect(screen.getByText('ShowCore')).toBeInTheDocument();
 
       // Non-software projects should not be visible
-      expect(screen.queryByText('Live Concert AV System')).not.toBeInTheDocument();
-      expect(screen.queryByText('Warehouse Inventory Automation')).not.toBeInTheDocument();
+      expect(screen.queryByText('AWS Training Dashboard')).not.toBeInTheDocument();
+      expect(screen.queryByText('Claudarity')).not.toBeInTheDocument();
     });
   });
 
@@ -96,7 +96,7 @@ describe('Portfolio Integration', () => {
     fireEvent.click(softwareButton);
 
     await waitFor(() => {
-      expect(screen.queryByText('Live Concert AV System')).not.toBeInTheDocument();
+      expect(screen.queryByText('AWS Training Dashboard')).not.toBeInTheDocument();
     });
 
     // Then click All to show everything again
@@ -104,9 +104,9 @@ describe('Portfolio Integration', () => {
     fireEvent.click(allButton);
 
     await waitFor(() => {
-      expect(screen.getByText('Live Concert AV System')).toBeInTheDocument();
       expect(screen.getByText('AI Command Center')).toBeInTheDocument();
-      expect(screen.getByText('Warehouse Inventory Automation')).toBeInTheDocument();
+      expect(screen.getByText('AWS Training Dashboard')).toBeInTheDocument();
+      expect(screen.getByText('Claudarity')).toBeInTheDocument();
     });
   });
 
@@ -127,17 +127,17 @@ describe('Portfolio Integration', () => {
     render(<Portfolio />);
 
     // Count projects by category in data
-    const entertainmentCount = projects.filter((p) => p.category === 'entertainment').length;
+    const infrastructureCount = projects.filter((p) => p.category === 'infrastructure').length;
     const automationCount = projects.filter((p) => p.category === 'automation').length;
     const softwareCount = projects.filter((p) => p.category === 'software').length;
 
-    // Test Entertainment
-    const entertainmentButton = screen.getByText('Entertainment');
-    fireEvent.click(entertainmentButton);
+    // Test Infrastructure
+    const infrastructureButton = screen.getByText('Infrastructure');
+    fireEvent.click(infrastructureButton);
 
     await waitFor(() => {
       const cards = screen.getAllByRole('article');
-      expect(cards).toHaveLength(entertainmentCount);
+      expect(cards).toHaveLength(infrastructureCount);
     });
 
     // Test Automation

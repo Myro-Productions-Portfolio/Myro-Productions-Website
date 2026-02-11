@@ -15,7 +15,7 @@ const SOCIAL_LINKS = [
   },
   {
     name: 'GitHub',
-    href: 'https://github.com/husky2466-codo',
+    href: 'https://github.com/Myro-Productions-Portfolio',
     icon: GitHubIcon,
     label: 'Visit Myro Productions on GitHub',
   },
@@ -190,12 +190,21 @@ export default function Footer() {
             </h3>
             <div className="space-y-3 text-sm text-text-secondary">
               <div>
-                <p className="font-medium text-text-primary mb-1">Email</p>
+                <p className="font-medium text-text-primary mb-1">Phone</p>
                 <a
-                  href="mailto:hello@myroproductions.com"
+                  href="tel:+13175631247"
                   className="hover:text-accent focus-visible:text-accent transition-colors duration-300 rounded px-1 -mx-1 inline-block"
                 >
-                  hello@myroproductions.com
+                  (317) 563-1247
+                </a>
+              </div>
+              <div>
+                <p className="font-medium text-text-primary mb-1">Email</p>
+                <a
+                  href="mailto:nmyers@myroproductions.com"
+                  className="hover:text-accent focus-visible:text-accent transition-colors duration-300 rounded px-1 -mx-1 inline-block"
+                >
+                  nmyers@myroproductions.com
                 </a>
               </div>
               <div>

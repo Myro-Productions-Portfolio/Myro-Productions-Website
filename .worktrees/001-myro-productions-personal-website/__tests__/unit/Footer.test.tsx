@@ -37,7 +37,7 @@ describe('Footer Component', () => {
 
     expect(screen.getByText('Email')).toBeInTheDocument();
     expect(
-      screen.getByRole('link', { name: /hello@myroproductions.com/i })
+      screen.getByRole('link', { name: /nmyers@myroproductions.com/i })
     ).toBeInTheDocument();
     expect(screen.getByText(/Remote & On-site Available/i)).toBeInTheDocument();
     expect(screen.getByText(/Mon - Fri: 9AM - 6PM EST/i)).toBeInTheDocument();
@@ -111,9 +111,9 @@ describe('Footer Component', () => {
     render(<Footer />);
 
     const emailLink = screen.getByRole('link', {
-      name: /hello@myroproductions.com/i,
+      name: /nmyers@myroproductions.com/i,
     });
-    expect(emailLink).toHaveAttribute('href', 'mailto:hello@myroproductions.com');
+    expect(emailLink).toHaveAttribute('href', 'mailto:nmyers@myroproductions.com');
   });
 
   it('quick links have correct href attributes', () => {

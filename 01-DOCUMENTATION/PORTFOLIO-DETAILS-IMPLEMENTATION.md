@@ -90,7 +90,7 @@ Each of the 5 featured projects includes:
    - Results: 10,000+ events, zero double-bookings
 
 5. **QuoteMyAV Platform** (Work Project)
-   - Challenge: Inconsistent AV equipment quoting
+   - Challenge: Inconsistent equipment quoting
    - Solution: AI-powered quoting with RAG
    - Tech: Next.js, PostgreSQL, Vector Embeddings, Claude API
    - Results: 90% accuracy, 5min average quote time

@@ -18,14 +18,14 @@ const testimonials: Testimonial[] = [
     quote:
       'Nicolas delivered our automation system ahead of schedule. The attention to detail and technical expertise was exceptional.',
     name: 'Production Manager',
-    company: 'Major AV Company',
+    company: 'Enterprise Client',
     role: 'Client Project',
   },
   {
     quote:
       'The AI Command Center transformed how we manage our daily workflows. Incredibly intuitive and powerful.',
     name: 'Tech Lead',
-    company: 'Event Production Team',
+    company: 'Technology Team',
     role: 'Internal Tool',
   },
   {
@@ -98,7 +98,7 @@ export default function Testimonials() {
             What Clients Say
           </h2>
           <p className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto">
-            Real feedback from production teams and project stakeholders who&apos;ve
+            Real feedback from clients and project stakeholders who&apos;ve
             experienced the difference.
           </p>
         </div>

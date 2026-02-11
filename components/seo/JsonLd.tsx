@@ -15,13 +15,15 @@ export default function JsonLd() {
     },
     contactPoint: {
       '@type': 'ContactPoint',
+      telephone: '+1-317-563-1247',
       contactType: 'Customer Service',
       availableLanguage: ['en'],
+      email: 'nmyers@myroproductions.com',
     },
     sameAs: [
       'https://x.com/Myro_Prod_Biz',
       'https://linkedin.com/in/nicolas-myers-8b1599123',
-      'https://github.com/husky2466-codo',
+      'https://github.com/Myro-Productions-Portfolio',
     ],
   }
 
@@ -57,7 +59,7 @@ export default function JsonLd() {
     ],
     sameAs: [
       'https://linkedin.com/in/nicolas-myers-8b1599123',
-      'https://github.com/husky2466-codo',
+      'https://github.com/Myro-Productions-Portfolio',
       'https://x.com/Myro_Prod_Biz',
     ],
   }
