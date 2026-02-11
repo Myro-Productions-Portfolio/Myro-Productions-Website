@@ -47,13 +47,13 @@ describe('Footer Component', () => {
     render(<Footer />);
 
     expect(
-      screen.getByLabelText('Visit Myro Productions on LinkedIn')
+      screen.getByLabelText('Visit Nicolas Myers on LinkedIn')
     ).toBeInTheDocument();
     expect(
       screen.getByLabelText('Visit Myro Productions on GitHub')
     ).toBeInTheDocument();
     expect(
-      screen.getByLabelText('Visit Myro Productions on Twitter')
+      screen.getByLabelText('Visit Myro Productions on X')
     ).toBeInTheDocument();
   });
 
@@ -61,7 +61,7 @@ describe('Footer Component', () => {
     render(<Footer />);
 
     const linkedInLink = screen.getByLabelText(
-      'Visit Myro Productions on LinkedIn'
+      'Visit Nicolas Myers on LinkedIn'
     );
     expect(linkedInLink).toHaveAttribute('target', '_blank');
     expect(linkedInLink).toHaveAttribute('rel', 'noopener noreferrer');

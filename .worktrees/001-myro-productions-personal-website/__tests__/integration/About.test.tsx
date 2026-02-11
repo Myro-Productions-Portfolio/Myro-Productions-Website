@@ -57,14 +57,12 @@ describe('About Section - Integration', () => {
 
   it('renders all highlight stats', () => {
     render(<About />);
-    expect(screen.getByText('10+')).toBeInTheDocument();
-    expect(screen.getByText('Years Experience')).toBeInTheDocument();
-    expect(screen.getByText('50+')).toBeInTheDocument();
-    expect(screen.getByText('Projects Delivered')).toBeInTheDocument();
-    expect(screen.getByText('100%')).toBeInTheDocument();
-    expect(screen.getByText('Client Satisfaction')).toBeInTheDocument();
-    expect(screen.getByText('∞')).toBeInTheDocument();
-    expect(screen.getByText('Coffee Consumed')).toBeInTheDocument();
+    expect(screen.getByText('13+')).toBeInTheDocument();
+    expect(screen.getByText('Years in Tech')).toBeInTheDocument();
+    expect(screen.getByText('1')).toBeInTheDocument();
+    expect(screen.getByText('AWS Certified')).toBeInTheDocument();
+    expect(screen.getByText('5+')).toBeInTheDocument();
+    expect(screen.getByText('Projects In Progress')).toBeInTheDocument();
   });
 
   it('renders the personal quote', () => {
@@ -73,9 +71,10 @@ describe('About Section - Integration', () => {
     expect(quote).toBeInTheDocument();
   });
 
-  it('renders the avatar placeholder with initials', () => {
+  it('renders the profile image', () => {
     render(<About />);
-    expect(screen.getByText('NM')).toBeInTheDocument();
+    const image = screen.getByAltText('Nicolas Myers - Founder of Myro Productions');
+    expect(image).toBeInTheDocument();
   });
 
   it('renders all skill tags', () => {
@@ -87,8 +86,8 @@ describe('About Section - Integration', () => {
       'Node.js',
       'Python',
       'AI/ML',
-      'Cloud Infrastructure',
-      'AV Systems',
+      'AWS Cloud',
+      'Home Lab',
       'GSAP',
       'Tailwind CSS',
       'PostgreSQL',

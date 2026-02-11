@@ -25,6 +25,12 @@ Thumbs.db
 .git
 .gitignore
 
+# Worktrees (development copy, not needed for build)
+.worktrees
+
+# Kiro IDE
+.kiro
+
 # Documentation (not needed in container)
 *.md
 docs/

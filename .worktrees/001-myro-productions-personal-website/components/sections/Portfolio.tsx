@@ -5,7 +5,7 @@ import { AnimatePresence } from 'motion/react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { projects } from '@/lib/portfolio-data-extended';
+import { projects } from '@/lib/portfolio-data';
 import FilterButtons from '@/components/ui/FilterButtons';
 import PortfolioCard from '@/components/ui/PortfolioCard';
 

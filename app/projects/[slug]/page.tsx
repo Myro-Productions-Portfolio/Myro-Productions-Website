@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, CheckCircle2, Code2 } from 'lucide-react';
-import { getProjectBySlug, getAllProjectSlugs } from '@/lib/portfolio-data-extended';
+import { getProjectBySlug, getAllProjectSlugs } from '@/lib/portfolio-data';
 import type { Metadata } from 'next';
 
 interface ProjectPageProps {

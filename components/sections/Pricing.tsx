@@ -5,6 +5,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import Button from '@/components/ui/Button'
+import { DURATIONS, EASINGS, STAGGER } from '@/lib/animations'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -64,22 +65,49 @@ const packages: PricingTier[] = [
 export default function Pricing() {
   const sectionRef = useRef<HTMLElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
+  const curtainLeftRef = useRef<HTMLDivElement>(null)
+  const curtainRightRef = useRef<HTMLDivElement>(null)
 
   const prefersReducedMotion =
     typeof window !== 'undefined'
       ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
       : false
 
-  // GSAP entrance animations
+  // GSAP curtain reveal and card entrance animations
   useGSAP(
     () => {
-      if (prefersReducedMotion || !cardsRef.current) return
+      if (prefersReducedMotion || !sectionRef.current || !cardsRef.current) return
 
       const cards = cardsRef.current.children
-      const cardsElement = cardsRef.current
+      const curtainLeft = curtainLeftRef.current
+      const curtainRight = curtainRightRef.current
 
-      // Staggered entrance animation
-      gsap.fromTo(
+      // Create a timeline for synchronized animations
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+          end: 'bottom 20%',
+          toggleActions: 'play none none reverse',
+        },
+      })
+
+      // Curtain opening animation (left panel slides left, right panel slides right)
+      if (curtainLeft && curtainRight) {
+        tl.to(
+          [curtainLeft, curtainRight],
+          {
+            scaleX: 0,
+            duration: DURATIONS.slow,
+            ease: EASINGS.inOut,
+            stagger: 0,
+          },
+          0
+        )
+      }
+
+      // Staggered card entrance (starts 0.25s after curtains begin opening)
+      tl.fromTo(
         cards,
         {
           opacity: 0,
@@ -88,22 +116,17 @@ export default function Pricing() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: cardsElement,
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse',
-          },
-        }
+          duration: DURATIONS.slow,
+          stagger: STAGGER.normal,
+          ease: EASINGS.snappy,
+        },
+        0.25
       )
 
       // Cleanup
       return () => {
         ScrollTrigger.getAll().forEach((trigger) => {
-          if (trigger.vars.trigger === cardsElement) {
+          if (trigger.vars.trigger === sectionRef.current) {
             trigger.kill()
           }
         })
@@ -116,9 +139,33 @@ export default function Pricing() {
     <section
       id="pricing"
       ref={sectionRef}
-      className="relative py-16 px-6 md:py-20 bg-carbon-light"
+      className="relative py-16 px-6 md:py-20 bg-carbon-light overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto">
+      {/* Curtain Panels */}
+      {!prefersReducedMotion && (
+        <>
+          {/* Left Curtain Panel */}
+          <div
+            ref={curtainLeftRef}
+            className="absolute inset-y-0 left-0 w-1/2 bg-carbon-dark z-20 origin-left"
+            style={{
+              boxShadow: '2px 0 20px 0 rgba(79, 209, 197, 0.3)',
+            }}
+            aria-hidden="true"
+          />
+          {/* Right Curtain Panel */}
+          <div
+            ref={curtainRightRef}
+            className="absolute inset-y-0 right-0 w-1/2 bg-carbon-dark z-20 origin-right"
+            style={{
+              boxShadow: '-2px 0 20px 0 rgba(79, 209, 197, 0.3)',
+            }}
+            aria-hidden="true"
+          />
+        </>
+      )}
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="text-center mb-10 md:mb-12">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-4">

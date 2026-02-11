@@ -57,7 +57,7 @@ describe('Portfolio Integration', () => {
   it('filters projects when Automation button is clicked', async () => {
     render(<Portfolio />);
 
-    const automationButton = screen.getByText('Automation');
+    const automationButton = screen.getByRole('button', { name: 'Automation' });
     fireEvent.click(automationButton);
 
     await waitFor(() => {

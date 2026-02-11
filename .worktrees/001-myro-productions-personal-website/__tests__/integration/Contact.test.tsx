@@ -24,7 +24,40 @@ jest.mock('@gsap/react', () => ({
   }),
 }));
 
+// Mock fetch for form submission tests
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    ok: true,
+    json: () => Promise.resolve({ success: true }),
+  })
+) as jest.Mock;
+
+// Mock localStorage for CSRF token
+const localStorageMock = {
+  getItem: jest.fn(() => 'mock-csrf-token'),
+  setItem: jest.fn(),
+  removeItem: jest.fn(),
+  clear: jest.fn(),
+};
+global.localStorage = localStorageMock as any;
+
 describe('Contact Section Integration', () => {
+  beforeEach(() => {
+    // Reset mocks before each test
+    (global.fetch as jest.Mock).mockClear();
+    // Add delay to simulate network request
+    (global.fetch as jest.Mock).mockImplementation(() =>
+      new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({
+            ok: true,
+            json: () => Promise.resolve({ success: true }),
+          });
+        }, 100); // 100ms delay to catch loading state
+      })
+    );
+  });
+
   describe('Section Structure', () => {
     it('renders the contact section with correct id', () => {
       render(<Contact />);
@@ -43,14 +76,14 @@ describe('Contact Section Integration', () => {
       // Use getAllByText for multiple "Email" elements (heading and form label)
       const emailElements = screen.getAllByText('Email');
       expect(emailElements.length).toBeGreaterThan(0);
-      expect(screen.getByText('nmyers@myroproductions.com')).toBeInTheDocument();
+      expect(screen.getByText('pmnicolasm@gmail.com')).toBeInTheDocument();
       expect(screen.getByText('Usually responds within 24 hours')).toBeInTheDocument();
     });
 
     it('renders social links', () => {
       render(<Contact />);
-      const linkedInLink = screen.getByLabelText('LinkedIn Profile');
-      const githubLink = screen.getByLabelText('GitHub Profile');
+      const linkedInLink = screen.getByLabelText(/Visit Nicolas Myers on LinkedIn/i);
+      const githubLink = screen.getByLabelText(/Visit Myro Productions on GitHub/i);
 
       expect(linkedInLink).toBeInTheDocument();
       expect(githubLink).toBeInTheDocument();
@@ -60,8 +93,8 @@ describe('Contact Section Integration', () => {
 
     it('email link has correct mailto href', () => {
       render(<Contact />);
-      const emailLink = screen.getByText('nmyers@myroproductions.com');
-      expect(emailLink).toHaveAttribute('href', 'mailto:nmyers@myroproductions.com');
+      const emailLink = screen.getByText('pmnicolasm@gmail.com');
+      expect(emailLink).toHaveAttribute('href', 'mailto:pmnicolasm@gmail.com');
     });
   });
 
@@ -70,7 +103,7 @@ describe('Contact Section Integration', () => {
       render(<Contact />);
 
       expect(screen.getByLabelText(/Name/i)).toBeInTheDocument();
-      expect(screen.getByLabelText(/Email/i)).toBeInTheDocument();
+      expect(screen.getByRole('textbox', { name: /Email/i })).toBeInTheDocument();
       expect(screen.getByLabelText(/Project Type/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/Message/i)).toBeInTheDocument();
     });
@@ -134,7 +167,7 @@ describe('Contact Section Integration', () => {
       const user = userEvent.setup();
       render(<Contact />);
 
-      const emailInput = screen.getByLabelText(/Email/i);
+      const emailInput = screen.getByRole('textbox', { name: /Email/i });
       const submitButton = screen.getByRole('button', { name: /Send Message/i });
 
       await user.type(emailInput, 'invalid-email');
@@ -189,7 +222,7 @@ describe('Contact Section Integration', () => {
       render(<Contact />);
 
       const nameInput = screen.getByLabelText(/Name/i);
-      const emailInput = screen.getByLabelText(/Email/i);
+      const emailInput = screen.getByRole('textbox', { name: /Email/i });
       const projectTypeSelect = screen.getByLabelText(/Project Type/i);
       const messageInput = screen.getByLabelText(/Message/i);
       const submitButton = screen.getByRole('button', { name: /Send Message/i });
@@ -236,7 +269,7 @@ describe('Contact Section Integration', () => {
       render(<Contact />);
 
       const nameInput = screen.getByLabelText(/Name/i);
-      const emailInput = screen.getByLabelText(/Email/i);
+      const emailInput = screen.getByRole('textbox', { name: /Email/i });
       const projectTypeSelect = screen.getByLabelText(/Project Type/i);
       const messageInput = screen.getByLabelText(/Message/i);
       const submitButton = screen.getByRole('button', { name: /Send Message/i });
@@ -267,7 +300,7 @@ describe('Contact Section Integration', () => {
       render(<Contact />);
 
       const nameInput = screen.getByLabelText(/Name/i);
-      const emailInput = screen.getByLabelText(/Email/i);
+      const emailInput = screen.getByRole('textbox', { name: /Email/i });
       const projectTypeSelect = screen.getByLabelText(/Project Type/i);
       const messageInput = screen.getByLabelText(/Message/i);
       const submitButton = screen.getByRole('button', { name: /Send Message/i });
@@ -294,7 +327,7 @@ describe('Contact Section Integration', () => {
       render(<Contact />);
 
       const nameInput = screen.getByLabelText(/Name/i) as HTMLInputElement;
-      const emailInput = screen.getByLabelText(/Email/i) as HTMLInputElement;
+      const emailInput = screen.getByRole('textbox', { name: /Email/i }) as HTMLInputElement;
       const projectTypeSelect = screen.getByLabelText(/Project Type/i) as HTMLSelectElement;
       const messageInput = screen.getByLabelText(/Message/i) as HTMLTextAreaElement;
       const submitButton = screen.getByRole('button', { name: /Send Message/i });
@@ -325,7 +358,7 @@ describe('Contact Section Integration', () => {
       render(<Contact />);
 
       const nameInput = screen.getByLabelText(/Name/i);
-      const emailInput = screen.getByLabelText(/Email/i);
+      const emailInput = screen.getByRole('textbox', { name: /Email/i });
       const projectTypeSelect = screen.getByLabelText(/Project Type/i);
       const messageInput = screen.getByLabelText(/Message/i);
       const submitButton = screen.getByRole('button', { name: /Send Message/i });
@@ -349,7 +382,7 @@ describe('Contact Section Integration', () => {
       render(<Contact />);
 
       const nameInput = screen.getByLabelText(/Name/i);
-      const emailInput = screen.getByLabelText(/Email/i);
+      const emailInput = screen.getByRole('textbox', { name: /Email/i });
       const projectTypeSelect = screen.getByLabelText(/Project Type/i);
       const messageInput = screen.getByLabelText(/Message/i);
       const submitButton = screen.getByRole('button', { name: /Send Message/i });
@@ -385,7 +418,7 @@ describe('Contact Section Integration', () => {
       render(<Contact />);
 
       expect(screen.getByLabelText(/Name/i)).toBeInTheDocument();
-      expect(screen.getByLabelText(/Email/i)).toBeInTheDocument();
+      expect(screen.getByRole('textbox', { name: /Email/i })).toBeInTheDocument();
       expect(screen.getByLabelText(/Project Type/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/Message/i)).toBeInTheDocument();
     });
@@ -393,8 +426,8 @@ describe('Contact Section Integration', () => {
     it('external links have security attributes', () => {
       render(<Contact />);
 
-      const linkedInLink = screen.getByLabelText('LinkedIn Profile');
-      const githubLink = screen.getByLabelText('GitHub Profile');
+      const linkedInLink = screen.getByLabelText(/Visit Nicolas Myers on LinkedIn/i);
+      const githubLink = screen.getByLabelText(/Visit Myro Productions on GitHub/i);
 
       expect(linkedInLink).toHaveAttribute('rel', 'noopener noreferrer');
       expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer');

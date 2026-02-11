@@ -77,7 +77,7 @@ describe('Navigation Component', () => {
 
     it('renders mobile menu button', () => {
       render(<Navigation />)
-      const menuButton = screen.getByRole('button', { name: /open menu/i })
+      const menuButton = screen.getByRole('button', { name: /open navigation menu/i })
       expect(menuButton).toBeInTheDocument()
     })
   })
@@ -90,13 +90,14 @@ describe('Navigation Component', () => {
       // Brand link
       expect(links[0]).toHaveAttribute('href', '#home')
 
-      // Nav links
-      const navLinks = links.slice(1, 6) // Get the desktop nav links
+      // Nav links (Home, Services, Portfolio, Pricing, About, Contact)
+      const navLinks = links.slice(1, 7) // Get the desktop nav links
       expect(navLinks[0]).toHaveAttribute('href', '#home')
       expect(navLinks[1]).toHaveAttribute('href', '#services')
       expect(navLinks[2]).toHaveAttribute('href', '#portfolio')
-      expect(navLinks[3]).toHaveAttribute('href', '#about')
-      expect(navLinks[4]).toHaveAttribute('href', '#contact')
+      expect(navLinks[3]).toHaveAttribute('href', '#pricing')
+      expect(navLinks[4]).toHaveAttribute('href', '#about')
+      expect(navLinks[5]).toHaveAttribute('href', '#contact')
     })
 
     it('handles navigation link clicks', async () => {
@@ -115,25 +116,25 @@ describe('Navigation Component', () => {
       render(<Navigation />)
       const mobileMenu = screen.queryByRole('navigation', { hidden: true })
       // The mobile menu should not be visible initially
-      expect(screen.getByRole('button', { name: /open menu/i })).toHaveAttribute('aria-expanded', 'false')
+      expect(screen.getByRole('button', { name: /open navigation menu/i })).toHaveAttribute('aria-expanded', 'false')
     })
 
     it('opens mobile menu when button is clicked', async () => {
       const user = userEvent.setup()
       render(<Navigation />)
 
-      const menuButton = screen.getByRole('button', { name: /open menu/i })
+      const menuButton = screen.getByRole('button', { name: /open navigation menu/i })
       await user.click(menuButton)
 
       expect(menuButton).toHaveAttribute('aria-expanded', 'true')
-      expect(menuButton).toHaveAttribute('aria-label', 'Close menu')
+      expect(menuButton).toHaveAttribute('aria-label', 'Close navigation menu')
     })
 
     it('closes mobile menu when button is clicked again', async () => {
       const user = userEvent.setup()
       render(<Navigation />)
 
-      const menuButton = screen.getByRole('button', { name: /open menu/i })
+      const menuButton = screen.getByRole('button', { name: /open navigation menu/i })
 
       // Open
       await user.click(menuButton)
@@ -148,7 +149,7 @@ describe('Navigation Component', () => {
       const user = userEvent.setup()
       render(<Navigation />)
 
-      const menuButton = screen.getByRole('button', { name: /open menu/i })
+      const menuButton = screen.getByRole('button', { name: /open navigation menu/i })
       await user.click(menuButton)
 
       // Click on a link in the mobile menu
@@ -166,7 +167,7 @@ describe('Navigation Component', () => {
       const user = userEvent.setup()
       render(<Navigation />)
 
-      const menuButton = screen.getByRole('button', { name: /open menu/i })
+      const menuButton = screen.getByRole('button', { name: /open navigation menu/i })
       await user.click(menuButton)
 
       expect(menuButton).toHaveAttribute('aria-expanded', 'true')
@@ -205,7 +206,7 @@ describe('Navigation Component', () => {
 
       render(<Navigation />)
 
-      const menuButton = screen.getByRole('button', { name: /open menu/i })
+      const menuButton = screen.getByRole('button', { name: /open navigation menu/i })
 
       // Open menu
       await user.click(menuButton)
@@ -232,7 +233,7 @@ describe('Navigation Component', () => {
 
     it('mobile menu button has proper aria attributes', () => {
       render(<Navigation />)
-      const menuButton = screen.getByRole('button', { name: /open menu/i })
+      const menuButton = screen.getByRole('button', { name: /open navigation menu/i })
       expect(menuButton).toHaveAttribute('aria-expanded')
       expect(menuButton).toHaveAttribute('aria-controls', 'mobile-menu')
     })

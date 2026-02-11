@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import type { Project } from '@/lib/portfolio-data-extended';
+import type { Project } from '@/lib/portfolio-data';
 
 gsap.registerPlugin(ScrollTrigger);
 
