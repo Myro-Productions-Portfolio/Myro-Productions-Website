@@ -32,23 +32,23 @@ describe('Portfolio Integration', () => {
     render(<Portfolio />);
 
     // Check that multiple projects are rendered
-    expect(screen.getByText('Live Concert AV System')).toBeInTheDocument();
+    expect(screen.getByText('Home Lab Infrastructure')).toBeInTheDocument();
     expect(screen.getByText('AI Command Center')).toBeInTheDocument();
     expect(screen.getByText('QuoteMyAV Platform')).toBeInTheDocument();
   });
 
-  it('filters projects when Entertainment button is clicked', async () => {
+  it('filters projects when Infrastructure button is clicked', async () => {
     render(<Portfolio />);
 
-    const entertainmentButton = screen.getByText('Entertainment');
-    fireEvent.click(entertainmentButton);
+    const infrastructureButton = screen.getByText('Infrastructure');
+    fireEvent.click(infrastructureButton);
 
     await waitFor(() => {
-      // Entertainment projects should be visible
-      expect(screen.getByText('Live Concert AV System')).toBeInTheDocument();
-      expect(screen.getByText('Festival Stage Management')).toBeInTheDocument();
+      // Infrastructure projects should be visible
+      expect(screen.getByText('Home Lab Infrastructure')).toBeInTheDocument();
+      expect(screen.getByText('Cloud Monitoring Stack')).toBeInTheDocument();
 
-      // Non-entertainment projects should not be visible
+      // Non-infrastructure projects should not be visible
       expect(screen.queryByText('AI Command Center')).not.toBeInTheDocument();
       expect(screen.queryByText('Warehouse Inventory Automation')).not.toBeInTheDocument();
     });
@@ -66,7 +66,7 @@ describe('Portfolio Integration', () => {
       expect(screen.getByText('Document Processing Pipeline')).toBeInTheDocument();
 
       // Non-automation projects should not be visible
-      expect(screen.queryByText('Live Concert AV System')).not.toBeInTheDocument();
+      expect(screen.queryByText('Home Lab Infrastructure')).not.toBeInTheDocument();
       expect(screen.queryByText('QuoteMyAV Platform')).not.toBeInTheDocument();
     });
   });
@@ -83,7 +83,7 @@ describe('Portfolio Integration', () => {
       expect(screen.getByText('QuoteMyAV Platform')).toBeInTheDocument();
 
       // Non-software projects should not be visible
-      expect(screen.queryByText('Live Concert AV System')).not.toBeInTheDocument();
+      expect(screen.queryByText('Home Lab Infrastructure')).not.toBeInTheDocument();
       expect(screen.queryByText('Warehouse Inventory Automation')).not.toBeInTheDocument();
     });
   });
@@ -96,7 +96,7 @@ describe('Portfolio Integration', () => {
     fireEvent.click(softwareButton);
 
     await waitFor(() => {
-      expect(screen.queryByText('Live Concert AV System')).not.toBeInTheDocument();
+      expect(screen.queryByText('Home Lab Infrastructure')).not.toBeInTheDocument();
     });
 
     // Then click All to show everything again
@@ -104,7 +104,7 @@ describe('Portfolio Integration', () => {
     fireEvent.click(allButton);
 
     await waitFor(() => {
-      expect(screen.getByText('Live Concert AV System')).toBeInTheDocument();
+      expect(screen.getByText('Home Lab Infrastructure')).toBeInTheDocument();
       expect(screen.getByText('AI Command Center')).toBeInTheDocument();
       expect(screen.getByText('Warehouse Inventory Automation')).toBeInTheDocument();
     });
@@ -127,17 +127,17 @@ describe('Portfolio Integration', () => {
     render(<Portfolio />);
 
     // Count projects by category in data
-    const entertainmentCount = projects.filter((p) => p.category === 'entertainment').length;
+    const infrastructureCount = projects.filter((p) => p.category === 'infrastructure').length;
     const automationCount = projects.filter((p) => p.category === 'automation').length;
     const softwareCount = projects.filter((p) => p.category === 'software').length;
 
-    // Test Entertainment
-    const entertainmentButton = screen.getByText('Entertainment');
-    fireEvent.click(entertainmentButton);
+    // Test Infrastructure
+    const infrastructureButton = screen.getByText('Infrastructure');
+    fireEvent.click(infrastructureButton);
 
     await waitFor(() => {
       const cards = screen.getAllByRole('article');
-      expect(cards).toHaveLength(entertainmentCount);
+      expect(cards).toHaveLength(infrastructureCount);
     });
 
     // Test Automation

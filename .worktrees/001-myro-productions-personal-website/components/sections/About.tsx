@@ -17,8 +17,8 @@ const skills = [
   'Node.js',
   'Python',
   'AI/ML',
-  'Cloud Infrastructure',
-  'AV Systems',
+  'AWS Cloud',
+  'Home Lab',
   'GSAP',
   'Tailwind CSS',
   'PostgreSQL',
@@ -26,8 +26,8 @@ const skills = [
 ];
 
 const highlights = [
-  { label: 'Years in AV Industry', value: '13+' },
-  { label: 'Dev Experience', value: '6 mo' },
+  { label: 'Years in Tech', value: '13+' },
+  { label: 'AWS Certified', value: '1' },
   { label: 'Projects In Progress', value: '5+' },
   { label: 'Coffee Consumed', value: '∞' },
 ];
@@ -201,10 +201,10 @@ export default function About() {
             {/* Story Paragraph */}
             <div className="prose prose-invert max-w-none">
               <p className="text-text-secondary text-lg leading-relaxed">
-                With over a decade of experience bridging the worlds of live entertainment and cutting-edge technology,
-                I specialize in transforming complex problems into elegant, automated solutions. My journey began in
-                AV event production—orchestrating live concerts, festivals, and corporate events—before evolving into
-                software development where I now build intelligent systems that work tirelessly so you don&apos;t have to.
+                With over a decade of experience in technology, I specialize in transforming complex problems into
+                elegant, automated solutions. My journey began in AV event production before transitioning to AWS cloud
+                services, AI development, and web solutions—where I now build intelligent systems, design cloud
+                infrastructure, and help businesses modernize their technology stack.
               </p>
             </div>
 

@@ -1,4 +1,4 @@
-export type ProjectCategory = 'entertainment' | 'automation' | 'software';
+export type ProjectCategory = 'infrastructure' | 'automation' | 'software';
 
 export interface Project {
   id: string;
@@ -12,18 +12,18 @@ export interface Project {
 
 export const PORTFOLIO_CATEGORIES = [
   { id: 'all', label: 'All' },
-  { id: 'entertainment', label: 'Entertainment' },
+  { id: 'infrastructure', label: 'Infrastructure' },
   { id: 'automation', label: 'Automation' },
   { id: 'software', label: 'Software' },
 ] as const;
 
 export const projects: Project[] = [
   {
-    id: 'live-concert-av',
-    title: 'Live Concert AV System',
-    category: 'entertainment',
-    description: 'Multi-camera live streaming setup with real-time switching and LED wall integration for stadium-scale events.',
-    tags: ['Live Streaming', 'Video Production', 'LED Walls'],
+    id: 'home-lab-infrastructure',
+    title: 'Home Lab Infrastructure',
+    category: 'infrastructure',
+    description: 'Enterprise-grade home lab with Mac Mini servers, DGX Spark GPUs, Docker orchestration, and Grafana/Prometheus monitoring.',
+    tags: ['Docker', 'Grafana', 'Prometheus'],
     imageGradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
   },
   {
@@ -45,11 +45,11 @@ export const projects: Project[] = [
     metrics: ['50+ hours saved monthly', '11 integrated modules'],
   },
   {
-    id: 'festival-stage-management',
-    title: 'Festival Stage Management',
-    category: 'entertainment',
-    description: 'Comprehensive LED wall control system managing multiple stages with synchronized lighting and video content.',
-    tags: ['LED Control', 'DMX', 'Show Control'],
+    id: 'cloud-monitoring-stack',
+    title: 'Cloud Monitoring Stack',
+    category: 'infrastructure',
+    description: 'Full observability platform with Grafana dashboards, Prometheus metrics, and custom exporters for multi-service monitoring.',
+    tags: ['Grafana', 'Prometheus', 'Docker'],
     imageGradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
   },
   {
@@ -65,17 +65,17 @@ export const projects: Project[] = [
     id: 'quote-my-av',
     title: 'QuoteMyAV Platform',
     category: 'software',
-    description: 'Web-based AV equipment quoting platform with inventory management and automated proposal generation.',
+    description: 'AI-powered quoting platform using RAG (Retrieval-Augmented Generation) for intelligent proposal generation and inventory management.',
     tags: ['Next.js', 'PostgreSQL', 'RAG AI'],
     imageGradient: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
     metrics: ['90% quote accuracy', '5min average quote time'],
   },
   {
-    id: 'corporate-event-production',
-    title: 'Corporate Event Production',
-    category: 'entertainment',
-    description: 'Full AV production for multi-day conferences including keynote streaming, breakout rooms, and hybrid attendance.',
-    tags: ['Conference AV', 'Hybrid Events', 'Webcast'],
+    id: 'web-hosting-platform',
+    title: 'Self-Hosted Web Platform',
+    category: 'infrastructure',
+    description: 'Caddy-based reverse proxy with Docker containers hosting multiple client websites, Cloudflare tunnels, and automated SSL.',
+    tags: ['Caddy', 'Docker', 'Cloudflare'],
     imageGradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
   },
   {

@@ -366,6 +366,38 @@ export default function Contact() {
               />
             </div>
 
+            {/* Phone */}
+            <div className="bg-carbon-light/50 backdrop-blur-sm rounded-lg p-6 border border-carbon-lighter hover:border-moss-600/50 transition-colors duration-300">
+              <h3 className="text-sm font-semibold text-text-secondary uppercase tracking-wide mb-2">
+                Phone
+              </h3>
+              <a
+                href="tel:+13175631247"
+                className="text-xl text-accent hover:text-accent-light focus-visible:text-accent-light transition-colors duration-300 inline-flex items-center gap-2 group rounded px-1 -mx-1"
+                aria-label="Call (317) 563-1247"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 group-hover:scale-110 transition-transform duration-300"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
+                </svg>
+                (317) 563-1247
+              </a>
+              <p className="text-sm text-text-secondary mt-3">
+                Available Mon - Fri, 9AM - 6PM EST
+              </p>
+            </div>
+
             {/* Email */}
             <div className="bg-carbon-light/50 backdrop-blur-sm rounded-lg p-6 border border-carbon-lighter hover:border-moss-600/50 transition-colors duration-300">
               <h3 className="text-sm font-semibold text-text-secondary uppercase tracking-wide mb-2">
@@ -427,7 +459,7 @@ export default function Contact() {
 
                 {/* GitHub */}
                 <a
-                  href="https://github.com/husky2466-codo"
+                  href="https://github.com/Myro-Productions-Portfolio"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 px-6 py-3 bg-carbon-light/50 backdrop-blur-sm rounded-lg border border-carbon-lighter hover:border-moss-600/50 focus-visible:border-accent transition-all duration-300 hover:scale-105 focus-visible:scale-105 group"

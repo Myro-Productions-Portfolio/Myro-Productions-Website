@@ -14,7 +14,7 @@ import { CSRF_COOKIE_NAME, CSRF_HEADER_NAME, isValidTokenFormat } from '@/lib/cs
  * - Rate limiting (5 requests per IP per minute)
  * - Email validation
  * - Input sanitization (XSS/injection protection)
- * - Sends to hello@myroproductions.com
+ * - Sends to nmyers@myroproductions.com
  * - CORS protection with allowed origins whitelist
  */
 
@@ -266,7 +266,7 @@ interface ContactFormData {
 
 // Web3Forms access key - Get yours at https://web3forms.com
 const WEB3FORMS_ACCESS_KEY = process.env.WEB3FORMS_ACCESS_KEY || 'YOUR_ACCESS_KEY_HERE';
-const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'hello@myroproductions.com';
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'nmyers@myroproductions.com';
 
 export async function POST(request: NextRequest) {
   const corsHeaders = getCorsHeaders(request);

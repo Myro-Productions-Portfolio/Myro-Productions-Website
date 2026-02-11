@@ -1,0 +1,51 @@
+# Dependencies
+node_modules
+npm-debug.log*
+
+# Next.js build output
+.next
+out
+
+# Testing
+coverage
+playwright-report
+test-results
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Documentation (not needed in container)
+*.md
+docs/
+
+# Auto-claude
+.auto-claude
+.auto-claude-status
+.claude_settings.json
+
+# Test files
+__tests__
+__mocks__
+*.spec.ts
+*.test.ts
+
+# Config files not needed in production
+jest.config.ts
+jest.setup.ts
+playwright.config.ts
+eslint.config.mjs
+
+# Development logs
+*.log
+dev.log

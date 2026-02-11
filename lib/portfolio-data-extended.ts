@@ -1,4 +1,4 @@
-export type ProjectCategory = 'entertainment' | 'automation' | 'software';
+export type ProjectCategory = 'infrastructure' | 'automation' | 'software';
 
 export interface Project {
   id: string;
@@ -20,7 +20,7 @@ export interface Project {
 
 export const PORTFOLIO_CATEGORIES = [
   { id: 'all', label: 'All' },
-  { id: 'entertainment', label: 'Entertainment' },
+  { id: 'infrastructure', label: 'Infrastructure' },
   { id: 'automation', label: 'Automation' },
   { id: 'software', label: 'Software' },
 ] as const;
@@ -58,13 +58,13 @@ export const projects: Project[] = [
   },
   {
     id: '4techs',
-    title: '4Techs Scheduling App',
+    title: 'Team Scheduling App',
     category: 'software',
-    description: 'AV technician scheduling and crew management application for coordinating field teams across multiple events.',
+    description: 'Mobile-first crew scheduling and team management application for coordinating field teams across multiple projects.',
     tags: ['React Native', 'Expo', 'Mobile'],
     imageGradient: 'linear-gradient(135deg, #ff6b6b 0%, #feca57 100%)',
     metrics: ['Mobile-first design', 'In Development'],
-    challenge: 'AV production companies struggle with coordinating field technicians across multiple simultaneous events. Manual scheduling via phone calls and spreadsheets leads to double-bookings, miscommunication, and inefficient crew utilization.',
+    challenge: 'Companies with distributed field teams struggle with coordinating technicians across multiple simultaneous projects. Manual scheduling via phone calls and spreadsheets leads to double-bookings and inefficient utilization.',
     solution: 'Developing a mobile-first scheduling platform using React Native that allows managers to assign crews, technicians to accept/decline shifts, and provides real-time visibility into availability. Integrating push notifications for last-minute changes.',
     techStack: [
       'React Native',
@@ -111,15 +111,15 @@ export const projects: Project[] = [
     status: 'in-progress'
   },
   {
-    id: 'event-tech-manager',
-    title: 'Event Tech Manager',
+    id: 'inventory-manager',
+    title: 'Inventory Management System',
     category: 'software',
-    description: 'Equipment tracking and inventory management system for AV production companies managing rental gear.',
+    description: 'Equipment tracking and inventory management system for companies managing assets across multiple locations.',
     tags: ['Next.js', 'PostgreSQL', 'Tailwind'],
     imageGradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
     metrics: ['Web-based', 'In Development'],
-    challenge: 'AV companies managing thousands of rental items (cameras, microphones, mixers, cables) across multiple simultaneous events face constant inventory conflicts and lost revenue from poor asset utilization.',
-    solution: 'Building a web-based inventory and booking system using Next.js that tracks equipment availability, automates conflict detection, generates pull sheets for warehouse teams, and provides real-time inventory status across all events.',
+    challenge: 'Companies managing thousands of assets across multiple locations and projects face constant inventory conflicts and lost revenue from poor asset utilization.',
+    solution: 'Building a web-based inventory and booking system using Next.js that tracks equipment availability, automates conflict detection, generates pull sheets for warehouse teams, and provides real-time inventory status.',
     techStack: [
       'Next.js 14',
       'PostgreSQL',
@@ -142,12 +142,12 @@ export const projects: Project[] = [
     id: 'quote-my-av',
     title: 'QuoteMyAV Platform',
     category: 'software',
-    description: 'AI-powered AV equipment quoting platform with RAG-based knowledge retrieval for accurate proposal generation.',
+    description: 'AI-powered quoting platform with RAG-based knowledge retrieval for accurate, automated proposal generation.',
     tags: ['Next.js', 'PostgreSQL', 'RAG AI'],
     imageGradient: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
     metrics: ['AI-powered', 'In Development'],
-    challenge: 'Generating accurate AV equipment quotes requires deep knowledge of venue requirements, technical specifications, and pricing. Junior sales staff often underbid or overbid, losing deals or profitability.',
-    solution: 'Developing an AI-powered quoting platform using Next.js and RAG (Retrieval-Augmented Generation) that analyzes event requirements, searches a knowledge base of past quotes, and generates itemized proposals with equipment recommendations.',
+    challenge: 'Generating accurate equipment quotes requires deep knowledge of technical specifications and pricing. Manual quoting is slow and error-prone, leading to lost deals or reduced profitability.',
+    solution: 'Developing an AI-powered quoting platform using Next.js and RAG (Retrieval-Augmented Generation) that analyzes requirements, searches a knowledge base of past quotes, and generates itemized proposals with recommendations.',
     techStack: [
       'Next.js 15',
       'PostgreSQL',
@@ -177,11 +177,11 @@ export const projects: Project[] = [
     status: 'planning'
   },
   {
-    id: 'festival-stage-management',
-    title: 'Festival Stage Management',
-    category: 'entertainment',
-    description: 'Comprehensive LED wall control system managing multiple stages with synchronized lighting and video content.',
-    tags: ['LED Control', 'DMX', 'Show Control'],
+    id: 'cloud-monitoring-stack',
+    title: 'Cloud Monitoring Stack',
+    category: 'infrastructure',
+    description: 'Full observability platform with Grafana dashboards, Prometheus metrics, and custom exporters for multi-service monitoring.',
+    tags: ['Grafana', 'Prometheus', 'Docker'],
     imageGradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
     metrics: ['In Development'],
     status: 'in-progress'

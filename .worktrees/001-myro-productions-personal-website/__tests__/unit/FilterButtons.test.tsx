@@ -12,7 +12,7 @@ describe('FilterButtons', () => {
     render(<FilterButtons activeFilter="all" onFilterChange={mockOnFilterChange} />);
 
     expect(screen.getByText('All')).toBeInTheDocument();
-    expect(screen.getByText('Entertainment')).toBeInTheDocument();
+    expect(screen.getByText('Infrastructure')).toBeInTheDocument();
     expect(screen.getByText('Automation')).toBeInTheDocument();
     expect(screen.getByText('Software')).toBeInTheDocument();
   });
@@ -27,10 +27,10 @@ describe('FilterButtons', () => {
   it('calls onFilterChange when button is clicked', () => {
     render(<FilterButtons activeFilter="all" onFilterChange={mockOnFilterChange} />);
 
-    const entertainmentButton = screen.getByText('Entertainment');
-    fireEvent.click(entertainmentButton);
+    const infrastructureButton = screen.getByText('Infrastructure');
+    fireEvent.click(infrastructureButton);
 
-    expect(mockOnFilterChange).toHaveBeenCalledWith('entertainment');
+    expect(mockOnFilterChange).toHaveBeenCalledWith('infrastructure');
   });
 
   it('calls onFilterChange with correct category id', () => {
@@ -44,13 +44,13 @@ describe('FilterButtons', () => {
   });
 
   it('sets aria-pressed attribute correctly', () => {
-    render(<FilterButtons activeFilter="entertainment" onFilterChange={mockOnFilterChange} />);
+    render(<FilterButtons activeFilter="infrastructure" onFilterChange={mockOnFilterChange} />);
 
     const allButton = screen.getByText('All');
-    const entertainmentButton = screen.getByText('Entertainment');
+    const infrastructureButton = screen.getByText('Infrastructure');
 
     expect(allButton).toHaveAttribute('aria-pressed', 'false');
-    expect(entertainmentButton).toHaveAttribute('aria-pressed', 'true');
+    expect(infrastructureButton).toHaveAttribute('aria-pressed', 'true');
   });
 
   it('has proper ARIA role for button group', () => {

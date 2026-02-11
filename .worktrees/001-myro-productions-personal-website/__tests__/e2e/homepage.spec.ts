@@ -384,7 +384,7 @@ test.describe('Homepage E2E Tests', () => {
 
     test('should display email contact info', async ({ page }) => {
       await page.locator('#contact').scrollIntoViewIfNeeded()
-      await expect(page.getByText(/hello@myroproductions.com/i)).toBeVisible()
+      await expect(page.getByText(/nmyers@myroproductions.com/i)).toBeVisible()
     })
 
     test('should display social links', async ({ page }) => {
@@ -453,7 +453,7 @@ test.describe('Homepage E2E Tests', () => {
     })
 
     test('should display contact email in footer', async ({ page }) => {
-      await expect(page.locator('footer').getByText(/hello@myroproductions.com/i)).toBeVisible()
+      await expect(page.locator('footer').getByText(/nmyers@myroproductions.com/i)).toBeVisible()
     })
   })
 
