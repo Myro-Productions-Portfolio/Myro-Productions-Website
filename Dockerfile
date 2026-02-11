@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile:1
-
 # Multi-stage Dockerfile for Next.js 15 with React 19
 # Optimized for standalone output mode
 
