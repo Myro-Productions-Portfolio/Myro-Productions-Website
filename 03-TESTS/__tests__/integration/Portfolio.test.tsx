@@ -32,9 +32,9 @@ describe('Portfolio Integration', () => {
     render(<Portfolio />);
 
     // Check that multiple projects are rendered
-    expect(screen.getByText('Home Lab Infrastructure')).toBeInTheDocument();
     expect(screen.getByText('AI Command Center')).toBeInTheDocument();
-    expect(screen.getByText('QuoteMyAV Platform')).toBeInTheDocument();
+    expect(screen.getByText('ShowCore')).toBeInTheDocument();
+    expect(screen.getByText('AWS Training Dashboard')).toBeInTheDocument();
   });
 
   it('filters projects when Infrastructure button is clicked', async () => {
@@ -45,12 +45,12 @@ describe('Portfolio Integration', () => {
 
     await waitFor(() => {
       // Infrastructure projects should be visible
-      expect(screen.getByText('Home Lab Infrastructure')).toBeInTheDocument();
-      expect(screen.getByText('Cloud Monitoring Stack')).toBeInTheDocument();
+      expect(screen.getByText('AWS Training Dashboard')).toBeInTheDocument();
+      expect(screen.getByText('DGX Spark Management')).toBeInTheDocument();
 
       // Non-infrastructure projects should not be visible
       expect(screen.queryByText('AI Command Center')).not.toBeInTheDocument();
-      expect(screen.queryByText('Warehouse Inventory Automation')).not.toBeInTheDocument();
+      expect(screen.queryByText('Claudarity')).not.toBeInTheDocument();
     });
   });
 
@@ -62,12 +62,12 @@ describe('Portfolio Integration', () => {
 
     await waitFor(() => {
       // Automation projects should be visible
-      expect(screen.getByText('Warehouse Inventory Automation')).toBeInTheDocument();
-      expect(screen.getByText('Document Processing Pipeline')).toBeInTheDocument();
+      expect(screen.getByText('Claudarity')).toBeInTheDocument();
+      expect(screen.getByText('Auto-Claude')).toBeInTheDocument();
 
       // Non-automation projects should not be visible
-      expect(screen.queryByText('Home Lab Infrastructure')).not.toBeInTheDocument();
-      expect(screen.queryByText('QuoteMyAV Platform')).not.toBeInTheDocument();
+      expect(screen.queryByText('AI Command Center')).not.toBeInTheDocument();
+      expect(screen.queryByText('AWS Training Dashboard')).not.toBeInTheDocument();
     });
   });
 
@@ -80,11 +80,11 @@ describe('Portfolio Integration', () => {
     await waitFor(() => {
       // Software projects should be visible
       expect(screen.getByText('AI Command Center')).toBeInTheDocument();
-      expect(screen.getByText('QuoteMyAV Platform')).toBeInTheDocument();
+      expect(screen.getByText('ShowCore')).toBeInTheDocument();
 
       // Non-software projects should not be visible
-      expect(screen.queryByText('Home Lab Infrastructure')).not.toBeInTheDocument();
-      expect(screen.queryByText('Warehouse Inventory Automation')).not.toBeInTheDocument();
+      expect(screen.queryByText('AWS Training Dashboard')).not.toBeInTheDocument();
+      expect(screen.queryByText('Claudarity')).not.toBeInTheDocument();
     });
   });
 
@@ -96,7 +96,7 @@ describe('Portfolio Integration', () => {
     fireEvent.click(softwareButton);
 
     await waitFor(() => {
-      expect(screen.queryByText('Home Lab Infrastructure')).not.toBeInTheDocument();
+      expect(screen.queryByText('AWS Training Dashboard')).not.toBeInTheDocument();
     });
 
     // Then click All to show everything again
@@ -104,9 +104,9 @@ describe('Portfolio Integration', () => {
     fireEvent.click(allButton);
 
     await waitFor(() => {
-      expect(screen.getByText('Home Lab Infrastructure')).toBeInTheDocument();
       expect(screen.getByText('AI Command Center')).toBeInTheDocument();
-      expect(screen.getByText('Warehouse Inventory Automation')).toBeInTheDocument();
+      expect(screen.getByText('AWS Training Dashboard')).toBeInTheDocument();
+      expect(screen.getByText('Claudarity')).toBeInTheDocument();
     });
   });
 
