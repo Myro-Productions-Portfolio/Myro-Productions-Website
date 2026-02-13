@@ -25,9 +25,24 @@ const skills = [
   'Docker',
 ];
 
+const certifications = [
+  {
+    name: 'AWS Certified Cloud Practitioner',
+    date: 'January 2026',
+    image: '/images/certifications/aws-certified-cloud-practitioner.png',
+    url: 'https://www.credly.com/badges/aws-certified-cloud-practitioner',
+  },
+  {
+    name: 'AWS Certified AI Practitioner',
+    date: 'February 2026',
+    image: '/images/certifications/aws-certified-ai-practitioner.png',
+    url: 'https://www.credly.com/badges/aws-certified-ai-practitioner',
+  },
+];
+
 const highlights = [
   { label: 'Years in Tech', value: '13+' },
-  { label: 'AWS Certified', value: '1' },
+  { label: 'AWS Certified', value: '2' },
   { label: 'Projects In Progress', value: '5+' },
   { label: 'Coffee Consumed', value: '∞' },
 ];
@@ -252,6 +267,39 @@ export default function About() {
                     skill={skill}
                     variant={index % 3 === 0 ? 'accent' : index % 3 === 1 ? 'moss' : 'default'}
                   />
+                ))}
+              </div>
+            </div>
+
+            {/* AWS Certifications */}
+            <div>
+              <h3 className="text-sm font-semibold text-text-secondary uppercase tracking-wide mb-4">
+                Certifications
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {certifications.map((cert, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-4 bg-carbon-light/50 backdrop-blur-sm rounded-lg p-4 border border-carbon-lighter hover:border-accent/40 transition-colors duration-300 group"
+                  >
+                    <div className="flex-shrink-0">
+                      <Image
+                        src={cert.image}
+                        alt={cert.name}
+                        width={80}
+                        height={80}
+                        className="rounded-md group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-text-primary leading-tight">
+                        {cert.name}
+                      </p>
+                      <p className="text-xs text-text-secondary mt-1">
+                        Earned {cert.date}
+                      </p>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
