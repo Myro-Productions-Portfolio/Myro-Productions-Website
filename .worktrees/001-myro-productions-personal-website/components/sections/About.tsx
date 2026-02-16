@@ -7,6 +7,7 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { pulse } from '@/lib/animations';
 import SkillTag from '@/components/ui/SkillTag';
+import CertificationBadge from '@/components/ui/CertificationBadge';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,9 +26,24 @@ const skills = [
   'Docker',
 ];
 
+const certifications = [
+  {
+    id: 'cloud-practitioner',
+    name: 'AWS Certified Cloud Practitioner',
+    imagePath: '/images/certifications/aws-certified-cloud-practitioner.png',
+    earnedDate: 'January 2026',
+  },
+  {
+    id: 'ai-practitioner',
+    name: 'AWS Certified AI Practitioner',
+    imagePath: '/images/certifications/aws-certified-ai-practitioner.png',
+    earnedDate: 'February 2026',
+  }
+];
+
 const highlights = [
   { label: 'Years in Tech', value: '13+' },
-  { label: 'AWS Certified', value: '1' },
+  { label: 'AWS Certified', value: '2' },
   { label: 'Projects In Progress', value: '5+' },
   { label: 'Coffee Consumed', value: '∞' },
 ];
@@ -38,6 +54,7 @@ export default function About() {
   const avatarRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const statRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const certificationsRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = typeof window !== 'undefined'
     ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
     : false;
@@ -144,6 +161,26 @@ export default function About() {
           }
         );
       });
+
+      // Animate certifications with stagger
+      if (certificationsRef.current) {
+        gsap.fromTo(
+          certificationsRef.current.children,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: certificationsRef.current,
+              start: 'top 80%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -228,6 +265,26 @@ export default function About() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* AWS Certifications */}
+            <div>
+              <h3 className="text-sm font-semibold text-text-secondary uppercase tracking-wide mb-4">
+                AWS Certifications
+              </h3>
+              <div
+                ref={certificationsRef}
+                className="flex flex-wrap gap-6 justify-start"
+              >
+                {certifications.map((cert) => (
+                  <CertificationBadge
+                    key={cert.id}
+                    name={cert.name}
+                    imagePath={cert.imagePath}
+                    earnedDate={cert.earnedDate}
+                  />
+                ))}
+              </div>
             </div>
 
             {/* Personal Quote */}
