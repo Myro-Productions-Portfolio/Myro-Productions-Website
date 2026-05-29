@@ -159,35 +159,51 @@ Major architectural decisions are documented in [`/docs/adr`](./docs/adr):
 ```
 myro-productions-website/
 ├── app/                        # Next.js App Router
-│   ├── (public)/              # Public pages
-│   │   ├── page.tsx           # Homepage
-│   │   ├── about/
-│   │   ├── services/
-│   │   ├── portfolio/
-│   │   └── contact/
+│   ├── page.tsx               # Homepage
+│   ├── layout.tsx             # Root layout
+│   ├── globals.css            # Global styles
+│   ├── sitemap.ts             # Dynamic sitemap
+│   ├── robots.ts              # robots.txt
+│   ├── opengraph-image.tsx    # OG image
+│   ├── icon.tsx               # Favicon
+│   ├── projects/             # Public project pages
+│   ├── payment/              # Payment pages
 │   ├── admin/                 # Protected admin area
+│   │   ├── page.tsx           # Dashboard
+│   │   ├── layout.tsx         # Admin layout
 │   │   ├── login/
 │   │   ├── clients/
 │   │   ├── projects/
 │   │   ├── payments/
-│   │   └── subscriptions/
-│   ├── api/                   # API routes
-│   │   ├── contact/
-│   │   ├── webhooks/
-│   │   └── admin/
-│   ├── layout.tsx             # Root layout
-│   └── globals.css            # Global styles
+│   │   ├── subscriptions/
+│   │   └── settings/
+│   └── api/                   # API routes
+│       ├── admin/            # Admin API (auth, clients, dashboard, payments, projects, subscriptions)
+│       ├── contact/          # Contact form handler
+│       ├── stripe/           # Stripe checkout + webhooks
+│       └── webhooks/         # External webhooks (calendly)
 ├── components/                # React components
 │   ├── ui/                    # UI primitives
-│   ├── layout/                # Layout components
-│   └── features/              # Feature components
+│   ├── sections/              # Page sections
+│   ├── admin/                 # Admin UI components
+│   ├── animations/            # Animation components
+│   ├── icons/                 # Icon components
+│   ├── seo/                   # SEO/structured-data components
+│   └── stripe/                # Stripe UI components
 ├── lib/                       # Utility libraries
-│   ├── db.ts                  # Prisma client
-│   ├── auth.ts                # Authentication
-│   └── utils.ts               # Utilities
+│   ├── prisma.ts              # Prisma client
+│   ├── auth/                  # Auth (session, password, middleware)
+│   ├── admin/                 # Admin helpers
+│   ├── validation/            # Input validation
+│   ├── stripe/                # Stripe config + webhook handlers
+│   ├── hooks/                 # React hooks
+│   ├── csrf.ts                # CSRF protection
+│   ├── ThemeContext.tsx       # Theme context
+│   ├── animations.ts          # Animation helpers
+│   ├── warpAnimation.ts       # Warp animation
+│   └── portfolio-data.ts      # Portfolio data
 ├── prisma/                    # Database schema
 │   ├── schema.prisma          # Prisma schema
-│   ├── migrations/            # Migrations
 │   └── seed.ts                # Seed data
 ├── public/                    # Static assets
 ├── docs/                      # Documentation
@@ -199,7 +215,6 @@ myro-productions-website/
 │   ├── TESTING.md
 │   ├── CONTRIBUTING.md
 │   └── SECURITY.md
-├── tests/                     # E2E tests
 ├── middleware.ts              # Auth middleware
 ├── next.config.ts             # Next.js config
 ├── tailwind.config.ts         # Tailwind config

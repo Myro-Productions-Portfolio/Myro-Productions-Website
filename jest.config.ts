@@ -28,7 +28,9 @@ const config: Config = {
     '<rootDir>/node_modules/',
     '<rootDir>/.next/',
     '<rootDir>/__tests__/e2e/',
+    '<rootDir>/.worktrees/',
   ],
+  modulePathIgnorePatterns: ['<rootDir>/.worktrees/'],
   testMatch: [
     '**/__tests__/**/*.test.[jt]s?(x)',
     '**/?(*.)test.[jt]s?(x)',

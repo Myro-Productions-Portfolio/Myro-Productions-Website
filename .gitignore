@@ -70,3 +70,13 @@ secrets.json
 # Claude Code context files
 CLAUDE.md
 CLAUDELONGTERM.md
+
+# Audit cleanup (batch1): worktrees, claude config, status, assets
+.worktrees/
+.claude/
+.auto-claude-status
+04-ASSETS/
+
+# Test artifacts
+playwright-report/
+test-results/
