@@ -6,12 +6,17 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('Starting database seed...');
 
-  // Create initial admin user
-  const adminEmail = 'pmnicolasm@gmail.com';
-  const adminPassword = 'ChangeMe123!';
+  const adminEmail = process.env.ADMIN_SEED_EMAIL;
+  const adminPassword = process.env.ADMIN_SEED_PASSWORD;
+  const adminName = process.env.ADMIN_SEED_NAME ?? 'Admin';
 
-  // Hash password with bcrypt (10 salt rounds)
-  const passwordHash = await bcrypt.hash(adminPassword, 10);
+  if (!adminEmail || !adminPassword) {
+    throw new Error(
+      'ADMIN_SEED_EMAIL and ADMIN_SEED_PASSWORD must be set. Refusing to seed with default credentials.',
+    );
+  }
+
+  const passwordHash = await bcrypt.hash(adminPassword, 12);
 
   // Check if admin already exists
   const existingAdmin = await prisma.adminUser.findUnique({
@@ -23,12 +28,11 @@ async function main() {
     return;
   }
 
-  // Create admin user
   const admin = await prisma.adminUser.create({
     data: {
       email: adminEmail,
       password_hash: passwordHash,
-      name: 'Myro Admin',
+      name: adminName,
       role: 'SUPER_ADMIN',
     },
   });
@@ -40,11 +44,8 @@ async function main() {
     role: admin.role,
   });
 
-  console.log('\n✅ Database seeded successfully!');
-  console.log('\n📧 Admin Login:');
-  console.log(`   Email: ${adminEmail}`);
-  console.log(`   Password: ${adminPassword}`);
-  console.log('\n⚠️  IMPORTANT: Change this password after first login!');
+  console.log('Database seeded successfully.');
+  console.log(`Admin email: ${adminEmail}`);
 }
 
 main()
