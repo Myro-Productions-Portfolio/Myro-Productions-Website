@@ -67,7 +67,7 @@ export default function Portfolio() {
             Portfolio
           </h2>
           <p className="text-text-secondary text-lg max-w-2xl mx-auto">
-            Explore a selection of projects spanning infrastructure, automation systems, and custom software solutions.
+            A focused selection of work — autonomous AI systems, full-stack platforms, and the engineering behind them.
           </p>
         </div>
 
