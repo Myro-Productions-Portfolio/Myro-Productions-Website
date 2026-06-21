@@ -1,0 +1,61 @@
+# Local development stack — Mac M4 Pro (10.0.0.210)
+# Brings up Postgres + the Next.js site bound to localhost only.
+# Usage:
+#   docker compose -f docker-compose.local.yml up -d --build
+#   docker compose -f docker-compose.local.yml logs -f web
+#   docker compose -f docker-compose.local.yml down            # stop, keep DB
+#   docker compose -f docker-compose.local.yml down -v         # stop, wipe DB
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: myro-website-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: myro
+      POSTGRES_PASSWORD: myro_dev
+      POSTGRES_DB: myro_dev
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - myro_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myro -d myro_dev"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_SITE_URL: "http://localhost:3002"
+        NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ""
+    container_name: myro-website
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # In-container, the db host is `db` (compose service name).
+      DATABASE_URL: "postgresql://myro:myro_dev@db:5432/myro_dev?schema=public"
+      JWT_SECRET: "${JWT_SECRET}"
+      ADMIN_SEED_EMAIL: "${ADMIN_SEED_EMAIL}"
+      ADMIN_SEED_PASSWORD: "${ADMIN_SEED_PASSWORD}"
+      ADMIN_SEED_NAME: "${ADMIN_SEED_NAME}"
+      STRIPE_SECRET_KEY: "${STRIPE_SECRET_KEY:-}"
+      STRIPE_WEBHOOK_SECRET: "${STRIPE_WEBHOOK_SECRET:-}"
+      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: "${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:-}"
+      NEXT_PUBLIC_SITE_URL: "http://localhost:3002"
+      NODE_ENV: "production"
+      WEB3FORMS_ACCESS_KEY: "${WEB3FORMS_ACCESS_KEY:-}"
+      CALENDLY_WEBHOOK_SIGNING_KEY: "${CALENDLY_WEBHOOK_SIGNING_KEY:-}"
+    ports:
+      - "127.0.0.1:3002:3000"
+    env_file:
+      - .env.local
+
+volumes:
+  myro_pgdata:
+    name: myro_website_pgdata

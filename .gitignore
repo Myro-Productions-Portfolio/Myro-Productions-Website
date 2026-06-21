@@ -80,3 +80,6 @@ CLAUDELONGTERM.md
 # Test artifacts
 playwright-report/
 test-results/
+server/lib/secrets.ts
+.env.docker
+CREDENTIALS_STATUS.md
