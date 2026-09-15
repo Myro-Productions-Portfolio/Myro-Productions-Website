@@ -83,3 +83,8 @@ test-results/
 server/lib/secrets.ts
 .env.docker
 CREDENTIALS_STATUS.md
+
+# OpenNext / Cloudflare Workers build output
+.open-next
+.wrangler
+cloudflare-env.d.ts

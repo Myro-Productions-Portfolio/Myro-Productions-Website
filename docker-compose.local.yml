@@ -30,7 +30,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_SITE_URL: "http://localhost:3002"
+        NEXT_PUBLIC_SITE_URL: "https://myroproductions.com"
         NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ""
     container_name: myro-website
     restart: unless-stopped
@@ -47,12 +47,14 @@ services:
       STRIPE_SECRET_KEY: "${STRIPE_SECRET_KEY:-}"
       STRIPE_WEBHOOK_SECRET: "${STRIPE_WEBHOOK_SECRET:-}"
       NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: "${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:-}"
-      NEXT_PUBLIC_SITE_URL: "http://localhost:3002"
+      NEXT_PUBLIC_SITE_URL: "https://myroproductions.com"
       NODE_ENV: "production"
       WEB3FORMS_ACCESS_KEY: "${WEB3FORMS_ACCESS_KEY:-}"
       CALENDLY_WEBHOOK_SIGNING_KEY: "${CALENDLY_WEBHOOK_SIGNING_KEY:-}"
     ports:
-      - "127.0.0.1:3002:3000"
+      # Must match the Cloudflare tunnel ingress for myroproductions.com,
+      # which is dashboard-managed and points at localhost:3001.
+      - "127.0.0.1:3001:3000"
     env_file:
       - .env.local
 

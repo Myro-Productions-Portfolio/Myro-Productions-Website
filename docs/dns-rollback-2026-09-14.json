@@ -1,0 +1,36 @@
+[
+  {
+    "id": "7e4870a0cc717c1f63485bf3050ebd30",
+    "name": "myroproductions.com",
+    "type": "CNAME",
+    "content": "80721cb3-8faf-42c0-b777-f20f09c2ec22.cfargotunnel.com",
+    "proxiable": true,
+    "proxied": true,
+    "ttl": 1,
+    "settings": {
+      "flatten_cname": false
+    },
+    "meta": {},
+    "comment": null,
+    "tags": [],
+    "created_on": "2026-02-16T21:13:21.224448Z",
+    "modified_on": "2026-02-16T21:13:21.224448Z"
+  },
+  {
+    "id": "0b79e14e8dac95cd153b0213370978d5",
+    "name": "www.myroproductions.com",
+    "type": "CNAME",
+    "content": "80721cb3-8faf-42c0-b777-f20f09c2ec22.cfargotunnel.com",
+    "proxiable": true,
+    "proxied": true,
+    "ttl": 1,
+    "settings": {
+      "flatten_cname": false
+    },
+    "meta": {},
+    "comment": null,
+    "tags": [],
+    "created_on": "2026-02-12T00:05:23.352565Z",
+    "modified_on": "2026-02-16T21:16:35.837053Z"
+  }
+]
